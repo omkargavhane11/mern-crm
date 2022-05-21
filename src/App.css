@@ -40,6 +40,8 @@
   display:flex;
   /* justify-content: space-around; */
   gap:20px;
+  position: fixed;
+  width:100%;
   background-color: rgb(255, 196, 196);
 }
 .navbar_link{
@@ -51,6 +53,7 @@
   cursor:pointer;
   background-color:rgb(249, 171, 171);
 }
+
 .signup_form_parent{
   width:100vw;
   height:100vh;
