@@ -8,6 +8,7 @@ import { Services } from './Services';
 import { AddLead } from './AddLead';
 import { AddService } from './AddService';
 import { Home } from './Home';
+import { SignIn } from './SignIn';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
       contactNo: 9012345678,
     },
   ]);
+
   const [service_data, setservice_data] = useState([
     {
       id: 1,
@@ -85,7 +87,8 @@ function App() {
         <h5 className="navbar_link" onClick={() => navigate('/contacts')}>Contacts</h5>
       </div>
       <Routes>
-        <Route path="/" element={<Signup />} />
+        <Route path="/" element={<SignIn />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Home />} />
         <Route path="/leads" element={<Leads lead_data={lead_data} setlead_data={setlead_data} />} />
         <Route path="/leads/add_lead_request" element={<AddLead lead_data={lead_data} setlead_data={setlead_data} />} />

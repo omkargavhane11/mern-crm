@@ -59,6 +59,9 @@
   justify-content: center;
   background-color: rgb(175, 82, 82);
 }
+.signup_redirect{
+  text-decoration :underline;
+}
 .signup_form{
   margin: auto;
   height: 350px;
