@@ -97,15 +97,17 @@ function App() {
         <h5 className="navbar_link" onClick={() => navigate('/services')}>Services</h5>
         <h5 className="navbar_link" onClick={() => navigate('/contacts')}>Contacts</h5>
       </div>
-      <Routes>
-        <Route path="/" element={<SignIn users={users} setUsers={setUsers} />} />
-        <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/leads" element={<Leads lead_data={lead_data} setlead_data={setlead_data} />} />
-        <Route path="/leads/add_lead_request" element={<AddLead lead_data={lead_data} setlead_data={setlead_data} />} />
-        <Route path="/services" element={<Services service_data={service_data} setservice_data={setservice_data} />} />
-        <Route path="/services/new_service_request" element={<AddService service_data={service_data} setservice_data={setservice_data} />} />
-      </Routes>
+      <div className="main">
+        <Routes>
+          <Route path="/" element={<SignIn users={users} setUsers={setUsers} />} />
+          <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/leads" element={<Leads lead_data={lead_data} setlead_data={setlead_data} />} />
+          <Route path="/leads/add_lead_request" element={<AddLead lead_data={lead_data} setlead_data={setlead_data} />} />
+          <Route path="/services" element={<Services service_data={service_data} setservice_data={setservice_data} />} />
+          <Route path="/services/new_service_request" element={<AddService service_data={service_data} setservice_data={setservice_data} />} />
+        </Routes>
+      </div>
     </div>
   );
 }

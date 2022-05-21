@@ -37,23 +37,30 @@
   }
 } */
 .navbar{
+  height:40px;
+padding: 4px;
   display:flex;
+  align-items: center;
   /* justify-content: space-around; */
   gap:20px;
   position: fixed;
+  top: 0;
+  /* margin-bottom: 50px;  */
   width:100%;
   background-color: rgb(255, 196, 196);
 }
 .navbar_link{
   padding:5px;
   border-radius: 5px;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 .navbar_link:hover{
   cursor:pointer;
   background-color:rgb(249, 171, 171);
 }
-
+.main{
+  margin-top:60px;
+}
 .signup_form_parent{
   width:100vw;
   height:100vh;
