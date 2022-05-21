@@ -58,9 +58,14 @@ padding: 4px;
   cursor:pointer;
   background-color:rgb(249, 171, 171);
 }
-.main{
-  margin-top:60px;
+.logout{
+  margin-left: auto;
+  margin-right: 15px;
 }
+.main{
+  margin-top:40px;
+}
+
 .signup_form_parent{
   width:100vw;
   height:100vh;

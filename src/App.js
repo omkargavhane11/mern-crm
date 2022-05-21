@@ -96,6 +96,7 @@ function App() {
         <h5 className="navbar_link" onClick={() => navigate('/leads')}>Leads</h5>
         <h5 className="navbar_link" onClick={() => navigate('/services')}>Services</h5>
         <h5 className="navbar_link" onClick={() => navigate('/contacts')}>Contacts</h5>
+        <h5 className="navbar_link logout" onClick={() => navigate('/')}>Log Out</h5>
       </div>
       <div className="main">
         <Routes>
