@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-
-export function Signup() {
+import { useEffect, useState } from 'react'
+export function Signup({ users, serUsers }) {
     const navigate = useNavigate();
     return (
         <div className="signup_form_parent">

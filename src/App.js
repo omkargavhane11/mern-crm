@@ -75,6 +75,17 @@ function App() {
     },
   ]);
 
+  const [users, setUsers] = [
+    {
+      fname: "omkar",
+      lname: "gavhane",
+      email: "ogomkargavhane@gmail.com",
+      password: "let@123",
+      username: "omkar123",
+      contact: 9191919191
+    }
+  ]
+
   const navigate = useNavigate();
   return (
     <div className="App">
@@ -87,8 +98,8 @@ function App() {
         <h5 className="navbar_link" onClick={() => navigate('/contacts')}>Contacts</h5>
       </div>
       <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<SignIn users={users} setUsers={setUsers} />} />
+        <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/leads" element={<Leads lead_data={lead_data} setlead_data={setlead_data} />} />
         <Route path="/leads/add_lead_request" element={<AddLead lead_data={lead_data} setlead_data={setlead_data} />} />
