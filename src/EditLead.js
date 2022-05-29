@@ -1,17 +1,37 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
+import { API } from "./global.js";
 
 export function EditLead({ lead_data, setlead_data }) {
     const { id } = useParams();
+
+    const [data, setData] = useState();
+    useEffect(() => {
+        fetch(`${API}/leads/edit/${id}`)
+            .then((res) => res.json())
+            .then((data) => setData(data[0]));
+    }, [])
+
+
+    return (
+        data ? <EditLeadForm data={data} /> : "Loading..."
+    )
+
+}
+
+
+function EditLeadForm({ data }) {
+
     const navigate = useNavigate();
-    const [fname, setFname] = useState("nothing");
-    const [lname, setLname] = useState("nothing");
-    const [email, setEmail] = useState("nothing");
-    const [address, setAddress] = useState("nothing");
-    const [contact, setContact] = useState("nothing");
-    const [intrest, setIntrest] = useState("nothing");
-    const [status, setStatus] = useState("New");
+
+    const [fname, setFname] = useState(data.fname);
+    const [lname, setLname] = useState(data.lname);
+    const [email, setEmail] = useState(data.email);
+    const [address, setAddress] = useState(data.address);
+    const [contact, setContact] = useState(data.contactNo);
+    const [intrest, setIntrest] = useState(data.intrest);
+    const [status, setStatus] = useState(data.status);
 
     return (
 
@@ -31,29 +51,34 @@ export function EditLead({ lead_data, setlead_data }) {
                 <label className="addLead_label" for="intrest">Intrested in </label>
                 <input onChange={(e) => setIntrest(e.target.value)} value={intrest} className="addLead_input" type="text" id="intrest" name="intrest" />
                 <label className="addLead_label" for="status">Lead Status</label>
-                <input onChange={(e) => setIntrest(e.target.value)} value={status} className="addLead_input" type="text" id="status" name="status" placeholder="status" />
+                <input onChange={(e) => setStatus(e.target.value)} value={status} className="addLead_input" type="text" id="status" name="status" placeholder="status" />
 
 
                 <button
                     onClick={() => {
                         let newLead = {
-                            id: Math.floor(Math.random() * 1000),
                             fname: fname,
                             lname: lname,
                             email: email,
-                            password: "password1",
-                            username: "username1",
                             address: address,
                             contactNo: contact,
                             status: status
                         };
-                        let temp = lead_data;
-                        temp[id] = newLead
-                        setlead_data([...temp]);
-                        // console.log(newLead.id);
-                        navigate('/leads');
+                        fetch(`${API}/leads/edit/${data._id}`,
+                            {
+                                method: "PUT",
+                                body: JSON.stringify(newLead),
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                            })
+                            .then((res) => res.json())
+                            .then(() => navigate(`/leads`));
+
                     }}
-                    className="addLead_form_save" type="submit" value="Submit">Save</button>
+                    className="addLead_form_save" type="submit" value="Submit">
+                    Save
+                </button>
             </div>
 
 

@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { API } from "./global.js";
 import React from 'react';
 
-export function AddService({ service_data, setservice_data }) {
+export function AddService() {
 
     const navigate = useNavigate();
 
@@ -51,11 +52,14 @@ export function AddService({ service_data, setservice_data }) {
                             intrest: intrest,
                             status: "new"
                         }
-                        let temp = service_data;
-                        setservice_data([...temp, newService])
-                        // console.log(newService.id);
-                        navigate('/services')
-                        console.log(document.getElementById('Lead').value);
+                        fetch(`${API}/services`, {
+                            method: "POST",
+                            body: JSON.stringify(newService),
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }).then((data) => data.json())
+                            .then(() => navigate('/services'));
                     }}
                     className="addLead_form_save" type="submit" value="Add">Save</button>
             </div>

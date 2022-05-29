@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { API } from "./global.js";
 import React from 'react';
 
-export function OneService({ service, service_data, setservice_data }) {
+export function OneService({ service }) {
     const navigate = useNavigate();
     return (
         <div className="oneLead">
@@ -27,9 +28,7 @@ export function OneService({ service, service_data, setservice_data }) {
                 }}>Edit</button>
                 <button type="button" className="save_changes"
                     onClick={() => {
-                        let temp = service_data;
-                        let result = temp.filter((mv) => mv.id !== service.id);
-                        setservice_data(result)
+                        fetch(`${API}/services/edit/${service._id}`, { method: "DELETE" }).then(() => navigate("/services"))
                     }}
                 >Delete</button>
             </div>

@@ -13,7 +13,7 @@ export function Leads() {
         fetch(`${API}/leads`)
             .then((res) => res.json())
             .then((data) => setlead_data(data));
-    }, [])
+    }, [lead_data])
 
     return (
         <div className="leads_parent">

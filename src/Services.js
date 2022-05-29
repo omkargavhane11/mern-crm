@@ -12,7 +12,7 @@ export function Services() {
         fetch(`${API}/services`)
             .then((res) => res.json())
             .then((data) => setservice_data(data));
-    }, [])
+    }, [service_data])
 
     return (
         <div className="leads_parent">
