@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import React from 'react';
 
 export function AddService({ service_data, setservice_data }) {
+
     const navigate = useNavigate();
+
     const [fname, setFname] = useState("nothing");
     const [lname, setLname] = useState("nothing");
     const [email, setEmail] = useState("nothing");
@@ -11,6 +14,7 @@ export function AddService({ service_data, setservice_data }) {
     const [intrest, setIntrest] = useState("nothing");
 
     return (
+
         <div className="addLead_parent">
 
             <div className="addLead_form">

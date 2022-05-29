@@ -1,5 +1,5 @@
-import { Navigate } from 'react-router-dom';
 import './App.css';
+import React from 'react';
 import { NavLink, Route, Routes, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { Signup } from './Signup';
@@ -24,6 +24,7 @@ function App() {
   }, [])
 
   const navigate = useNavigate();
+
   return (
     <div className="App">
       <div className="navbar">

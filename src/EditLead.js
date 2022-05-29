@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import React from 'react';
 
 export function EditLead({ lead_data, setlead_data }) {
     const { id } = useParams();
@@ -13,6 +14,7 @@ export function EditLead({ lead_data, setlead_data }) {
     const [status, setStatus] = useState("New");
 
     return (
+
         <div className="addLead_parent">
             <div className="addLead_form">
                 <h3>Edit Lead </h3>

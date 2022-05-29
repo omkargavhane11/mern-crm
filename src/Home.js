@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { API } from "./global.js";
+import React from 'react';
 
 export function Home() {
     const navigate = useNavigate();
@@ -30,13 +31,13 @@ export function Home() {
                 <div className="dashboard_content leads" onClick={() => {
                     navigate('/leads');
                 }}>
-                    <p className="count">5</p>
+                    <p className="count">{lead_data.length}</p>
                     <p className="h6_custom">Leads</p>
                 </div>
                 <div className="dashboard_content sales" onClick={() => {
                     navigate('/services');
                 }}>
-                    <p className="count">6</p>
+                    <p className="count">{service_data.length}</p>
                     <p className="h6_custom">Services</p>
                 </div>
 

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { API } from "./global.js";
 import { OneService } from "./OneService";
+import React from 'react';
 
 export function Services() {
 

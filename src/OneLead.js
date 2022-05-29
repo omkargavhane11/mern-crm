@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { API } from "./global.js";
+import React from 'react';
 
 export function OneLead({ lead }) {
     const navigate = useNavigate();

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 export function OneService({ service, service_data, setservice_data }) {
     const navigate = useNavigate();
