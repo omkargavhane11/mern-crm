@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import { API } from "./global.js";
 
-export function EditService({ setservice_data, service_data }) {
+export function EditService() {
 
     const { id } = useParams();
     const [data, setData] = useState();
