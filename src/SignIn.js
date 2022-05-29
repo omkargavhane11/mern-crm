@@ -39,7 +39,7 @@ export function SignIn() {
                                 if (users[i].username === username && users[i].password === password) {
                                     return true;
                                 } else {
-                                    return false;
+
                                 }
                             }
                         }
