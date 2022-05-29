@@ -42,26 +42,27 @@ export function SignIn({ users, setUsers, lead_data }) {
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        function check(users) {
-                            for (let i = 0; i <= users.length; i++) {
-                                if (users[i].fname === username && users[i].password === password) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
-                            }
-                        }
+                        // function check(users) {
+                        //     for (let i = 0; i <= users.length; i++) {
+                        //         if (users[i].fname === username && users[i].password === password) {
+                        //             return true;
+                        //         } else {
+                        //             return false;
+                        //         }
+                        //     }
+                        // }
 
-                        let result = check(users);
-                        console.log(result);
-                        if (result) {
-                            setInvalid(false)
-                            navigate('/home');
-                        } else {
-                            setInvalid(true)
-                            document.getElementById("invalid").style.className = "shake";
-                        }
-                        // console.log(users);
+                        // let result = check(users);
+                        // console.log(result);
+                        // if (result) {
+                        //     setInvalid(false)
+                        //     navigate('/home');
+                        // } else {
+                        //     setInvalid(true)
+                        //     document.getElementById("invalid").style.className = "shake";
+                        // }
+
+                        console.log(users);
                     }}
                 >Login</button>
             </div>

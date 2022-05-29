@@ -11,6 +11,7 @@ import { Home } from './Home';
 import { SignIn } from './SignIn';
 import { EditLead } from './EditLead';
 import { EditService } from './EditService';
+import { API } from "./global.js";
 
 function App() {
 
@@ -92,20 +93,13 @@ function App() {
     },
   ]);
 
-  const [users, setUsers] = useState(
-    [
-      {
-        fname: "omkar",
-        lname: "gavhane",
-        username: "omkar123",
-        email: "ogomkargavhane@gmail.com",
-        password: "let@123",
-        contact: 9082732814,
-        role: "admin"
-      },
-    ]
-  );
+  const [users, setUsers] = useState([]);
 
+  useEffect(() => {
+    fetch(`${API}/users`)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, [])
 
   const navigate = useNavigate();
   return (
