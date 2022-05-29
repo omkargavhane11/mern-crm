@@ -15,84 +15,6 @@ import { API } from "./global.js";
 
 function App() {
 
-  const [lead_data, setlead_data] = useState([
-    {
-      id: 1,
-      fname: "fn1",
-      lname: "ln1",
-      email: "email1",
-      password: "password1",
-      username: "username1",
-      address: "address1",
-      contactNo: 9012345678,
-      intrest: "something",
-      status: "new"
-    },
-    {
-      id: 2,
-      fname: "fn2",
-      lname: "ln2",
-      email: "email2",
-      password: "password2",
-      username: "username2",
-      address: "address2",
-      contactNo: 9012345678,
-      intrest: "something",
-      status: "new"
-    },
-    {
-      id: 3,
-      fname: "fn3",
-      lname: "ln3",
-      email: "email3",
-      password: "password3",
-      username: "username3",
-      address: "address3",
-      contactNo: 9012345678,
-      intrest: "something",
-      status: "new"
-    },
-  ]);
-
-  const [service_data, setservice_data] = useState([
-    {
-      id: 1,
-      fname: "fn1",
-      lname: "ln1",
-      email: "email1",
-      password: "password1",
-      username: "username1",
-      address: "address1",
-      contactNo: 9191919191,
-      intrest: "something",
-      status: "new"
-    },
-    {
-      id: 2,
-      fname: "fn2",
-      lname: "ln2",
-      email: "email2",
-      password: "password2",
-      username: "username2",
-      address: "address2",
-      contactNo: 9191919191,
-      intrest: "something",
-      status: "new"
-    },
-    {
-      id: 3,
-      fname: "fn3",
-      lname: "ln3",
-      email: "email3",
-      password: "password3",
-      username: "username3",
-      address: "address3",
-      contactNo: 9191919191,
-      intrest: "something",
-      status: "new"
-    },
-  ]);
-
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -115,15 +37,15 @@ function App() {
       </div>
       <div div className="main" >
         <Routes>
-          <Route path="/" element={<SignIn users={users} setUsers={setUsers} lead_data={lead_data} />} />
+          <Route path="/" element={<SignIn users={users} setUsers={setUsers} />} />
           <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
-          <Route path="/home" element={<Home lead_data={lead_data} service_data={service_data} />} />
-          <Route path="/leads" element={<Leads lead_data={lead_data} setlead_data={setlead_data} />} />
-          <Route path="/leads/edit/:id" element={<EditLead lead_data={lead_data} setlead_data={setlead_data} />} />
-          <Route path="/leads/add_lead_request" element={<AddLead lead_data={lead_data} setlead_data={setlead_data} />} />
-          <Route path="/services" element={<Services service_data={service_data} setservice_data={setservice_data} />} />
-          <Route path="/services/edit/:id" element={<EditService service_data={service_data} setservice_data={setservice_data} />} />
-          <Route path="/services/new_service_request" element={<AddService service_data={service_data} setservice_data={setservice_data} />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/leads" element={<Leads />} />
+          <Route path="/leads/edit/:id" element={<EditLead />} />
+          <Route path="/leads/add_lead_request" element={<AddLead />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/edit/:id" element={<EditService />} />
+          <Route path="/services/new_service_request" element={<AddService />} />
         </Routes>
 
       </div >

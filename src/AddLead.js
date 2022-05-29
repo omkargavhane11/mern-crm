@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { API } from "./global.js";
 
-export function AddLead({ lead_data, setlead_data }) {
+export function AddLead() {
 
     const navigate = useNavigate();
 
@@ -10,7 +11,7 @@ export function AddLead({ lead_data, setlead_data }) {
     const [lname, setLname] = useState("nothing");
     const [email, setEmail] = useState("nothing");
     const [address, setAddress] = useState("nothing");
-    const [contact, setContact] = useState(9090909090);
+    const [contact, setContact] = useState("9090909090");
     const [intrest, setIntrest] = useState("nothing");
 
     return (
@@ -40,25 +41,29 @@ export function AddLead({ lead_data, setlead_data }) {
                 <button
                     onClick={() => {
                         let newLead = {
-                            id: Math.floor(Math.random() * 1000),
                             fname: fname,
                             lname: lname,
                             email: email,
-                            password: "password1",
-                            username: "username1",
                             address: address,
                             contactNo: contact,
+                            intrest: intrest,
                             status: "new"
                         }
-                        let temp = lead_data;
-                        setlead_data([...temp, newLead])
-                        console.log(newLead.id);
-                        navigate('/leads')
+                        fetch(`${API}/leads`, {
+                            method: "POST",
+                            body: JSON.stringify(newLead),
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }).then((data) => data.json())
+                            .then(() => navigate('/leads'));
                     }}
+
+
                     className="addLead_form_save" type="submit" value="Submit">Add</button>
             </div>
 
 
-        </div>
+        </div >
     );
 }

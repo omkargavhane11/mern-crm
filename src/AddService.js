@@ -42,11 +42,10 @@ export function AddService({ service_data, setservice_data }) {
                             fname: fname,
                             lname: lname,
                             email: email,
-                            password: "password1",
-                            username: "username1",
                             address: address,
                             contactNo: contact,
-                            status: ""
+                            intrest: intrest,
+                            status: "new"
                         }
                         let temp = service_data;
                         setservice_data([...temp, newService])

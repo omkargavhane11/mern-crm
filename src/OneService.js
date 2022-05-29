@@ -22,7 +22,7 @@ export function OneService({ service, service_data, setservice_data }) {
             <br />
             <div className="button_div">
                 <button type="button" className="save_changes" onClick={() => {
-                    navigate(`/services/edit/${service.id}`)
+                    navigate(`/services/edit/${service._id}`)
                 }}>Edit</button>
                 <button type="button" className="save_changes"
                     onClick={() => {

@@ -1,8 +1,24 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { API } from "./global.js";
 
-export function Home({ service_data, leads_data }) {
+export function Home() {
     const navigate = useNavigate();
 
+    const [lead_data, setlead_data] = useState([]);
+
+    const [service_data, setservice_data] = useState([]);
+
+    useEffect(() => {
+        fetch(`${API}/leads`)
+            .then((res) => res.json())
+            .then((data) => setlead_data(data));
+    }, [])
+    useEffect(() => {
+        fetch(`${API}/services`)
+            .then((res) => res.json())
+            .then((data) => setservice_data(data));
+    }, [])
 
     return (
         <div className="home_parent">

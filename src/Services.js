@@ -1,10 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react'
+import { API } from "./global.js";
 import { OneService } from "./OneService";
 
-export function Services({ service_data, setservice_data }) {
+export function Services() {
 
     const navigate = useNavigate();
+    const [service_data, setservice_data] = useState([]);
+    useEffect(() => {
+        fetch(`${API}/services`)
+            .then((res) => res.json())
+            .then((data) => setservice_data(data));
+    }, [])
 
     return (
         <div className="leads_parent">

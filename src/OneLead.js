@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { API } from "./global.js";
 
-export function OneLead({ lead, lead_data, setlead_data }) {
+export function OneLead({ lead }) {
     const navigate = useNavigate();
     return (
         <div className="oneLead">
@@ -40,16 +41,15 @@ export function OneLead({ lead, lead_data, setlead_data }) {
                     type="button"
                     className="save_changes"
                     onClick={() => {
-                        navigate(`/leads/edit/${lead.id}`)
+                        navigate(`/leads/edit/${lead._id}`)
                     }}
                 >Edit</button>
                 <button
                     type="button"
                     className="save_changes"
                     onClick={() => {
-                        let temp = lead_data;
-                        let result = temp.filter((mv) => mv.id !== lead.id);
-                        setlead_data(result)
+                        fetch(`${API}/leads/edit/${lead._id}`, { method: "DELETE" }).then(() => navigate("/leads"))
+                        // console.log(lead._id);
                     }}
                 >Delete</button>
             </div>
