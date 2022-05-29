@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react';
+import { API } from "./global.js";
 
 
-
-export function SignIn({ users, setUsers, lead_data }) {
+export function SignIn() {
 
     const navigate = useNavigate();
+    const [users, setUsers] = useState([]);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [invalid, setInvalid] = useState(false);
@@ -16,8 +17,12 @@ export function SignIn({ users, setUsers, lead_data }) {
         display: invalid ? "block" : "none",
     }
 
-
-
+    useEffect(() => {
+        fetch(`${API}/users`)
+            .then((res) => res.json())
+            .then((data) => setUsers(data));
+    }, [])
+    // console.log(users);
     return (
         <div className="signup_form_parent">
             <div className="signup_form">
@@ -31,7 +36,7 @@ export function SignIn({ users, setUsers, lead_data }) {
                     onClick={() => {
                         function check(users) {
                             for (let i = 0; i <= users.length; i++) {
-                                if (users[i].fname === username && users[i].password === password) {
+                                if (users[i].username === username && users[i].password === password) {
                                     return true;
                                 } else {
                                     return false;
@@ -47,6 +52,7 @@ export function SignIn({ users, setUsers, lead_data }) {
                             setInvalid(true)
                             document.getElementById("invalid").style.className = "shake";
                         }
+                        // console.log(users[0].password, users[0].username);
 
                     }}
                 >Login</button>
