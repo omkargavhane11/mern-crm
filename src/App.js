@@ -98,7 +98,7 @@ function App() {
   useEffect(() => {
     fetch(`${API}/users`)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setUsers(data));
   }, [])
 
   const navigate = useNavigate();
