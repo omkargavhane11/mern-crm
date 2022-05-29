@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import React from 'react';
-
+import { API } from "./global.js";
 
 export function Signup({ users, setUsers }) {
     const navigate = useNavigate();
@@ -35,10 +35,14 @@ export function Signup({ users, setUsers }) {
                             contact: contact,
                             role: "admin"
                         }
-                        let temp = users;
-                        setUsers([...temp, newUser])
-                        // console.log(newUser);
-                        navigate('/')
+                        fetch(`${API}/users`, {
+                            method: "POST",
+                            body: JSON.stringify(newUser),
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }).then((data) => data.json())
+                            .then(() => navigate('/'));
                     }}
                 >Sign Up</button>
                 <p><span onClick={() => navigate('/')} className="signup_redirect">Sign In</span></p>

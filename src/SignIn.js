@@ -17,7 +17,10 @@ export function SignIn({ users }) {
         display: invalid ? "block" : "none",
     }
 
-    // console.log(users);
+    function check(u) {
+        return u.find((m) => m.username === username && m.password === password)
+    }
+
     return (
         <div className="signup_form_parent">
             <div className="signup_form">
@@ -29,18 +32,10 @@ export function SignIn({ users }) {
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        function check(users) {
-                            for (let i = 0; i <= users.length; i++) {
-                                if (users[i].username === username && users[i].password === password) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
-                            }
-                        }
+
                         // check(users);
                         let result = check(users);
-                        if (result === true) {
+                        if (result) {
                             setInvalid(false)
                             navigate('/home');
                         } else {
