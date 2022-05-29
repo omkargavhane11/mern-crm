@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-export function Home() {
+export function Home({ service_data, leads_data }) {
     const navigate = useNavigate();
+
 
     return (
         <div className="home_parent">
@@ -12,10 +13,16 @@ export function Home() {
             <div className="dashboard">
                 <div className="dashboard_content leads" onClick={() => {
                     navigate('/leads');
-                }}>Leads</div>
+                }}>
+                    <p className="count">5</p>
+                    <p className="h6_custom">Leads</p>
+                </div>
                 <div className="dashboard_content sales" onClick={() => {
                     navigate('/services');
-                }}>Services</div>
+                }}>
+                    <p className="count">6</p>
+                    <p className="h6_custom">Services</p>
+                </div>
 
             </div>
         </div>

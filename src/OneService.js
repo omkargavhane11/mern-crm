@@ -1,6 +1,7 @@
-
+import { useNavigate } from 'react-router-dom';
 
 export function OneService({ service, service_data, setservice_data }) {
+    const navigate = useNavigate();
     return (
         <div className="oneLead">
             <p className="h6_custom bold">First Name :</p>
@@ -13,18 +14,16 @@ export function OneService({ service, service_data, setservice_data }) {
             <p className="h6_custom">{service.address}</p>
             <p className="h6_custom bold">Contact No :</p>
             <p className="h6_custom">{service.contactNo}</p>
-            <label className="h6_custom bold">Service Status :</label>
-            <select className="h6_custom option">
-                <option className="option" value="Created">Created</option>
-                <option className="option" value="Released">Released</option>
-                <option className="option" value="Open" selected>Open</option>
-                <option className="option" value="Cancelled">Cancelled</option>
-                <option className="option" value="In Process">In Process</option>
-                <option className="option" value="Completed">Completed</option>
-            </select>
+            <p className="h6_custom bold">Intrested In :</p>
+            <p className="h6_custom">{service.intrest}</p>
+            <p className="h6_custom bold">Service status :</p>
+            <p className="h6_custom">{service.status}</p>
+
             <br />
             <div className="button_div">
-                <button type="button" className="save_changes">Save changes</button>
+                <button type="button" className="save_changes" onClick={() => {
+                    navigate(`/services/edit/${service.id}`)
+                }}>Edit</button>
                 <button type="button" className="save_changes"
                     onClick={() => {
                         let temp = service_data;

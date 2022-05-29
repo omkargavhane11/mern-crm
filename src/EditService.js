@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-export function AddService({ service_data, setservice_data }) {
+export function EditService({ setservice_data, service_data }) {
+
     const navigate = useNavigate();
     const [fname, setFname] = useState("nothing");
     const [lname, setLname] = useState("nothing");
@@ -9,35 +10,32 @@ export function AddService({ service_data, setservice_data }) {
     const [address, setAddress] = useState("nothing");
     const [contact, setContact] = useState("nothing");
     const [intrest, setIntrest] = useState("nothing");
+    const [status, setStatus] = useState("New");
+
 
     return (
         <div className="addLead_parent">
-
             <div className="addLead_form">
-                <h3>  New Service Request </h3>
+                <h3>Edit Service</h3>
                 <label className="addLead_label" for="fname">First Name</label>
                 <input onChange={(e) => setFname(e.target.value)} className="addLead_input" type="text" id="fname" name="firstname" placeholder="Your firstname.." />
-
                 <label className="addLead_label" for="lname">Last Name</label>
                 <input onChange={(e) => setLname(e.target.value)} className="addLead_input" type="text" id="lname" name="lastname" placeholder="Your last name.." />
-
                 <label className="addLead_label" for="Email">Email</label>
-                <input onChange={(e) => setEmail(e.target.value)} className="addLead_input" type="email" id="Email" name="Email" placeholder="Your email.." />
-
+                <input onChange={(e) => setEmail(e.target.value)} className="addLead_input" type="email" id="Email" name="Email" placeholder="Your address.." />
                 <label className="addLead_label" for="Address">Address</label>
                 <input onChange={(e) => setAddress(e.target.value)} className="addLead_input" type="text" id="Address" name="Address" placeholder="Address" />
-
-                <label className="addLead_label" for="contactNo">Contact No</label>
-                <input onChange={(e) => setContact(e.target.value)} className="addLead_input" type="number" id="contactNo" name="contactNo" placeholder="contactNo" />
-
+                <label className="addLead_label" for="contactNo">Last Name</label>
+                <input onChange={(e) => setContact(e.target.value)} className="addLead_input" type="text" id="contactNo" name="contactNo" placeholder="contactNo" />
                 <label className="addLead_label" for="intrest">Intrested in </label>
-                <input onChange={(e) => setIntrest(e.target.value)} className="addLead_input" type="text" id="intrest" name="intrest" placeholder="intrest" />
-
+                <input onChange={(e) => setIntrest(e.target.value)} value={intrest} className="addLead_input" type="text" id="intrest" name="intrest" placeholder="intrest" />
+                <label className="addLead_label" for="status">Service Status</label>
+                <input onChange={(e) => setIntrest(e.target.value)} value={status} className="addLead_input" type="text" id="status" name="status" placeholder="status" />
 
 
                 <button
                     onClick={() => {
-                        let newService = {
+                        let newLead = {
                             id: Math.floor(Math.random() * 1000),
                             fname: fname,
                             lname: lname,
@@ -46,15 +44,14 @@ export function AddService({ service_data, setservice_data }) {
                             username: "username1",
                             address: address,
                             contactNo: contact,
-                            status: ""
-                        }
+                            status: status
+                        };
                         let temp = service_data;
-                        setservice_data([...temp, newService])
-                        // console.log(newService.id);
-                        navigate('/services')
-                        console.log(document.getElementById('Lead').value);
+                        setservice_data([...temp, newLead]);
+                        console.log(newLead.id);
+                        navigate('/services');
                     }}
-                    className="addLead_form_save" type="submit" value="Add">Save</button>
+                    className="addLead_form_save" type="submit" value="Submit">Save</button>
             </div>
 
 

@@ -72,7 +72,7 @@ padding: 4px;
   display: flex;
   text-align: center;
   justify-content: center;
-  background-color: rgb(175, 82, 82);
+  background-color: rgb(250, 247, 247);
 }
 .signup_redirect{
   text-decoration :underline;
@@ -87,6 +87,26 @@ padding: 4px;
   display: flex;
   flex-direction: column;
 }
+.shake{
+  animation:  shake 0.8s;
+}
+  
+@keyframes shake{
+      0%{
+        transform: translateX(0)
+      }
+      25%{
+        transform: translateX(25px);
+      }
+        
+      50%{
+        transform: translateX(-25px);
+      }
+      100%{
+        transform: translateX(0px);
+      }
+} 
+
 .input{
   height:18px;
   margin-bottom: 5px;
@@ -118,11 +138,15 @@ padding: 4px;
   height:100px;
   width:100px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 1px solid grey;
   border-radius: 8px;
-  padding: 10px;
+  /* padding: 10px; */
+}
+.count{
+  font-size:25px;
 }
 .leads_parent{
   margin-top: 5px;
@@ -144,9 +168,7 @@ padding: 4px;
   padding:8px;
 
 }
-/* .button_div{
-  display
-} */
+
 .oneLead{
   padding-left: 10px;
   border-radius: 10px;
@@ -155,8 +177,14 @@ padding: 4px;
   border: 1px solid grey;
   height:auto;
 }
+.content{
+  display:flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
 .bold{
   font-weight: bold;
+  margin-right:5px;
 }
 .h6_custom{
   font-size:14px
@@ -165,7 +193,6 @@ padding: 4px;
   margin-left: 5px;
 }
 .save_changes{
-  margin-top: 10px;
   margin-bottom: 10px;
   padding: 3px;
   margin-right: 5px;
