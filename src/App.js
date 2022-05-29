@@ -11,9 +11,17 @@ import { Home } from './Home';
 import { SignIn } from './SignIn';
 import { EditLead } from './EditLead';
 import { EditService } from './EditService';
-
+import { API } from "./global.js";
 
 function App() {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API}/users`)
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, [])
 
   const navigate = useNavigate();
 
@@ -30,8 +38,8 @@ function App() {
       </div>
       <div div className="main" >
         <Routes>
-          <Route path="/" element={<SignIn />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<SignIn users={users} setUsers={setUsers} />} />
+          <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
           <Route path="/home" element={<Home />} />
           <Route path="/leads" element={<Leads />} />
           <Route path="/leads/edit/:id" element={<EditLead />} />

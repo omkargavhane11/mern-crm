@@ -4,10 +4,10 @@ import React from 'react';
 import { API } from "./global.js";
 
 
-export function SignIn() {
+export function SignIn({ users }) {
 
     const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [invalid, setInvalid] = useState(false);
@@ -17,11 +17,6 @@ export function SignIn() {
         display: invalid ? "block" : "none",
     }
 
-    useEffect(() => {
-        fetch(`${API}/users`)
-            .then((res) => res.json())
-            .then((data) => setUsers(data));
-    }, [])
     // console.log(users);
     return (
         <div className="signup_form_parent">
@@ -39,22 +34,19 @@ export function SignIn() {
                                 if (users[i].username === username && users[i].password === password) {
                                     return true;
                                 } else {
-
+                                    return false;
                                 }
-                                return false;
                             }
                         }
-
+                        // check(users);
                         let result = check(users);
-                        if (result) {
+                        if (result === true) {
                             setInvalid(false)
                             navigate('/home');
                         } else {
                             setInvalid(true)
                             document.getElementById("invalid").style.className = "shake";
                         }
-                        // console.log(users[0].password, users[0].username);
-
                     }}
                 >Login</button>
             </div>
