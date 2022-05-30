@@ -43,7 +43,7 @@ export function VerifyEmail() {
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        // setCode(Math.random().toString(36).replace(/[^a-z]+/g, ''))
+                        // (Math.random().toString(36).replace(/[^a-z]+/g, ''))
 
                         let result = check(users);
                         if (result) {
