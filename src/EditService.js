@@ -5,7 +5,7 @@ import { API } from "./global.js";
 
 export function EditService() {
 
-    const { id } = useParams();
+    const { id, username } = useParams();
     const [data, setData] = useState();
     useEffect(() => {
         fetch(`${API}/services/edit/${id}`)
@@ -14,12 +14,13 @@ export function EditService() {
     }, [])
 
     return (
-        data ? <EditServiceForm data={data} /> : "Loading..."
+        data ? <EditServiceForm data={data} username={username} /> : "Loading..."
     )
 }
 
 
-function EditServiceForm({ data }) {
+function EditServiceForm({ data, username }) {
+
     const navigate = useNavigate();
     const [fname, setFname] = useState(data.fname);
     const [lname, setLname] = useState(data.lname);
@@ -68,7 +69,7 @@ function EditServiceForm({ data }) {
                                 },
                             })
                             .then((res) => res.json())
-                            .then(() => navigate(`/services`));
+                            .then(() => navigate(`/${username}/services`));
                     }}
                     className="addLead_form_save" type="submit" value="Submit">Save</button>
             </div>

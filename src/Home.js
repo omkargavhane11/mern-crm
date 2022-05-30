@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { API } from "./global.js";
 import React from 'react';
 
 export function Home() {
     const navigate = useNavigate();
+    const { username } = useParams();
 
     const [lead_data, setlead_data] = useState([]);
 
@@ -29,13 +30,13 @@ export function Home() {
             </div>
             <div className="dashboard">
                 <div className="dashboard_content leads" onClick={() => {
-                    navigate('/leads');
+                    navigate(`/${username}/leads`);
                 }}>
                     <p className="count">{lead_data.length}</p>
                     <p className="h6_custom">Leads</p>
                 </div>
                 <div className="dashboard_content sales" onClick={() => {
-                    navigate('/services');
+                    navigate(`/${username}/services`);
                 }}>
                     <p className="count">{service_data.length}</p>
                     <p className="h6_custom">Services</p>

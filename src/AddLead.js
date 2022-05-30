@@ -2,18 +2,30 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { API } from "./global.js";
 import React from 'react';
+import { send } from 'emailjs-com';
 
 export function AddLead() {
 
     const navigate = useNavigate();
+    const { username } = useParams();
+
+    const [fname, setFname] = useState();
+    const [lname, setLname] = useState();
+    const [email, setEmail] = useState();
+    const [address, setAddress] = useState();
+    const [contact, setContact] = useState();
+    const [intrest, setIntrest] = useState();
 
 
-    const [fname, setFname] = useState("nothing");
-    const [lname, setLname] = useState("nothing");
-    const [email, setEmail] = useState("nothing");
-    const [address, setAddress] = useState("nothing");
-    const [contact, setContact] = useState("9090909090");
-    const [intrest, setIntrest] = useState("nothing");
+    function sendEmail(a) {
+        send(
+            'service_7jqb24r',
+            'template_o2rtfcj', // template id of lead mail body
+            { fname, email, a }, //{sender_name,sender_email,message}
+            'lyZGPaZXRsmWLyAOx'
+        ).then((res) => console.log(res, res.message))
+            .catch((err) => console.log(err, err.message))
+    };
 
     return (
         <div className="addLead_parent">
@@ -57,7 +69,9 @@ export function AddLead() {
                                 "Content-Type": "application/json",
                             },
                         }).then((data) => data.json())
-                            .then(() => navigate('/leads'));
+                            .then(() => navigate(`/${username}/leads`))
+
+                        sendEmail(newLead)
                     }}
 
 

@@ -1,9 +1,18 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { API } from "./global.js";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export function OneService({ service }) {
     const navigate = useNavigate();
+    const { username } = useParams();
+
+    const [user, setUser] = useState({});
+    useEffect(() => {
+        fetch(`${API}/users/${username}`)
+            .then((res) => res.json())
+            .then((data) => setUser(data[0]));
+    }, [])
+
     return (
         <div className="oneLead">
             <p className="h6_custom bold">First Name :</p>
@@ -24,11 +33,20 @@ export function OneService({ service }) {
             <br />
             <div className="button_div">
                 <button type="button" className="save_changes" onClick={() => {
-                    navigate(`/services/edit/${service._id}`)
+                    if (user.role === 'admin' || user.role === 'manager') {
+                        navigate(`/${username}/services/edit/${service._id}`)
+                    } else {
+                        alert("Not authorized to edit service")
+                    }
+
                 }}>Edit</button>
                 <button type="button" className="save_changes"
                     onClick={() => {
-                        fetch(`${API}/services/edit/${service._id}`, { method: "DELETE" }).then(() => navigate("/services"))
+                        if (user.role === 'admin' || user.role === 'manager') {
+                            fetch(`${API}/services/edit/${service._id}`, { method: "DELETE" }).then(() => navigate(`/${username}/services`))
+                        } else {
+                            alert("Not authorized to delete lead")
+                        }
                     }}
                 >Delete</button>
             </div>

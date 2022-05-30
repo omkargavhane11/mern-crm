@@ -12,6 +12,9 @@ import { SignIn } from './SignIn';
 import { EditLead } from './EditLead';
 import { EditService } from './EditService';
 import { API } from "./global.js";
+import { VerifyEmail } from './VerifyEmail';
+import { VerifyToken } from './VerifyToken';
+import { PasswordReset } from './PasswordReset';
 
 function App() {
 
@@ -39,14 +42,17 @@ function App() {
       <div div className="main" >
         <Routes>
           <Route path="/" element={<SignIn users={users} setUsers={setUsers} />} />
+          <Route path="/verifyemail" element={<VerifyEmail />} />
+          <Route path="/verifytoken" element={<VerifyToken />} />
+          <Route path="/passwordreset" element={<PasswordReset />} />
           <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/leads" element={<Leads />} />
-          <Route path="/leads/edit/:id" element={<EditLead />} />
-          <Route path="/leads/add_lead_request" element={<AddLead />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/edit/:id" element={<EditService />} />
-          <Route path="/services/new_service_request" element={<AddService />} />
+          <Route path="/:username/home" element={<Home />} />
+          <Route path="/:username/leads" element={<Leads />} />
+          <Route path="/:username/leads/edit/:id" element={<EditLead />} />
+          <Route path="/:username/leads/add_lead_request" element={<AddLead />} />
+          <Route path="/:username/services" element={<Services />} />
+          <Route path="/:username/services/edit/:id" element={<EditService />} />
+          <Route path="/:username/services/new_service_request" element={<AddService />} />
         </Routes>
 
       </div >

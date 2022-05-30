@@ -1,9 +1,18 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { API } from "./global.js";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export function OneLead({ lead }) {
+    const { username } = useParams();
     const navigate = useNavigate();
+
+    const [user, setUser] = useState({});
+    useEffect(() => {
+        fetch(`${API}/users/${username}`)
+            .then((res) => res.json())
+            .then((data) => setUser(data[0]));
+    }, [])
+
     return (
         <div className="oneLead">
             <div className="content">
@@ -42,15 +51,22 @@ export function OneLead({ lead }) {
                     type="button"
                     className="save_changes"
                     onClick={() => {
-                        navigate(`/leads/edit/${lead._id}`)
+                        if (user.role === 'admin' || user.role === 'manager') {
+                            navigate(`/${username}/leads/edit/${lead._id}`)
+                        } else {
+                            alert("Not authorized to edit lead")
+                        }
                     }}
                 >Edit</button>
                 <button
                     type="button"
                     className="save_changes"
                     onClick={() => {
-                        fetch(`${API}/leads/edit/${lead._id}`, { method: "DELETE" }).then(() => navigate("/leads"))
-                        // console.log(lead._id);
+                        if (user.role === 'admin' || user.role === 'manager') {
+                            fetch(`${API}/leads/edit/${lead._id}`, { method: "DELETE" }).then(() => navigate(`/${username}/leads`))
+                        } else {
+                            alert("Not authorized to delete lead")
+                        }
                     }}
                 >Delete</button>
             </div>

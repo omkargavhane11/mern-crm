@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import React from 'react';
-import { API } from "./global.js";
 
 
 export function SignIn({ users }) {
@@ -17,6 +16,12 @@ export function SignIn({ users }) {
         display: invalid ? "block" : "none",
     }
 
+    const forgot = {
+        display: invalid ? "block" : "none",
+        textDecoration: "underline",
+        cursor: "pointer"
+    }
+
     function check(u) {
         return u.find((m) => m.username === username && m.password === password)
     }
@@ -28,16 +33,21 @@ export function SignIn({ users }) {
                 <h4>Login to your account</h4>
                 <input onChange={(e) => setUsername(e.target.value)} type="email" className="input" placeholder="Enter your username" />
                 <input onChange={(e) => setPassword(e.target.value)} type="text" className="input" placeholder="Enter your password" />
+                <p
+                    onClick={() => navigate('/verifyemail')}
+                    style={forgot}
+                    id="forgot"
+                    className="forgot">
+                    Forgot Password ?
+                </p>
                 <p style={credentials} id="invalid" className="invalid shake">Invalid credentials</p>
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-
-                        // check(users);
                         let result = check(users);
                         if (result) {
                             setInvalid(false)
-                            navigate('/home');
+                            navigate(`/${username}/home`);
                         } else {
                             setInvalid(true)
                             document.getElementById("invalid").style.className = "shake";

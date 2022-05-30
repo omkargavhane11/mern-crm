@@ -1,18 +1,29 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { API } from "./global.js";
 import React from 'react';
+import { send } from 'emailjs-com';
 
 export function AddService() {
 
     const navigate = useNavigate();
-
+    const { username } = useParams();
     const [fname, setFname] = useState("nothing");
     const [lname, setLname] = useState("nothing");
     const [email, setEmail] = useState("nothing");
     const [address, setAddress] = useState("nothing");
     const [contact, setContact] = useState("nothing");
     const [intrest, setIntrest] = useState("nothing");
+
+    function sendEmail(a) {
+        send(
+            'service_7jqb24r',
+            'template_o2rtfcj', // template id of service request mail body
+            { fname, email, a }, //{sender_name,sender_email,message}
+            'lyZGPaZXRsmWLyAOx'
+        ).then((res) => console.log(res, res.message))
+            .catch((err) => console.log(err, err.message))
+    };
 
     return (
 
@@ -43,7 +54,6 @@ export function AddService() {
                 <button
                     onClick={() => {
                         let newService = {
-                            id: Math.floor(Math.random() * 1000),
                             fname: fname,
                             lname: lname,
                             email: email,
@@ -59,7 +69,9 @@ export function AddService() {
                                 "Content-Type": "application/json",
                             },
                         }).then((data) => data.json())
-                            .then(() => navigate('/services'));
+                            .then(() => navigate(`/${username}/services`))
+
+                        sendEmail(newService)
                     }}
                     className="addLead_form_save" type="submit" value="Add">Save</button>
             </div>

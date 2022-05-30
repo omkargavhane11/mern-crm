@@ -76,10 +76,21 @@ padding: 4px;
 }
 .signup_redirect{
   text-decoration :underline;
+  cursor: pointer;
 }
 .signup_form{
   margin: auto;
   height: 350px;
+  width:310px;
+  border: 1px solid grey;
+  border-radius:15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.verifyemail{
+  margin: auto;
+  height: auto;
   width:310px;
   border: 1px solid grey;
   border-radius:15px;
