@@ -48,18 +48,7 @@ export function VerifyEmail() {
                         let result = check(users);
                         if (result) {
 
-                            navigate(`${email}/verifytoken`)
-
-                            fetch(`${API}/leads/edit`,
-                                {
-                                    method: "PUT",
-                                    body: JSON.stringify(newLead),
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    },
-                                })
-                                .then((res) => res.json())
-                                .then(() => navigate(`/${username}/leads`));
+                            alert("user exists")
                         } else {
                             alert("Email address not registered");
                         }
