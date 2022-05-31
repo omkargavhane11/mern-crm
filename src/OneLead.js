@@ -45,7 +45,6 @@ export function OneLead({ lead }) {
                 <p className="h6_custom">{lead.status}</p>
             </div>
 
-            <br />
             <div className="button_div">
                 <button
                     type="button"

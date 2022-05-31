@@ -42,16 +42,20 @@
 } */
 .navbar{
   height:40px;
-padding: 4px;
+  padding: 4px;
   display:flex;
   align-items: center;
-  /* justify-content: space-around; */
   gap:20px;
   position: fixed;
   top: 0;
-  /* margin-bottom: 50px;  */
+  /* margin-bottom: 40px;  */
   width:100%;
   background-color: rgb(255, 196, 196);
+}
+@media screen and (max-width:500px) {
+  .contacts{
+    display:none !important;
+  }
 }
 .navbar_link{
   padding:5px;
@@ -205,7 +209,7 @@ padding: 4px;
 }
 
 .oneLead{
-  padding-left: 10px;
+  padding: 10px;
   border-radius: 10px;
   width:300px;
   text-align: left;
@@ -228,9 +232,10 @@ padding: 4px;
   margin-left: 5px;
 }
 .save_changes{
+  margin-top: 10px;
   margin-bottom: 10px;
   padding: 3px;
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 /* ADD NEW LEAD FORM  */
