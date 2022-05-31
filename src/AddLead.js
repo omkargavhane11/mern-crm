@@ -17,15 +17,15 @@ export function AddLead() {
     const [intrest, setIntrest] = useState();
 
 
-    function sendEmail(a) {
-        send(
-            'service_7jqb24r',
-            'template_o2rtfcj', // template id of lead mail body
-            { fname, email, a }, //{sender_name,sender_email,message}
-            'lyZGPaZXRsmWLyAOx'
-        ).then((res) => console.log(res, res.message))
-            .catch((err) => console.log(err, err.message))
-    };
+    // function sendEmail(a) {
+    //     send(
+    //         'service_7jqb24r',
+    //         'template_o2rtfcj', // template id of lead mail body
+    //         { fname, email, a }, //{sender_name,sender_email,message}
+    //         'lyZGPaZXRsmWLyAOx'
+    //     ).then((res) => console.log(res, res.message))
+    //         .catch((err) => console.log(err, err.message))
+    // };
 
     return (
         <div className="addLead_parent">
@@ -71,7 +71,7 @@ export function AddLead() {
                         }).then((data) => data.json())
                             .then(() => navigate(`/${username}/leads`))
 
-                        sendEmail(newLead)
+                        // sendEmail(newLead)
                     }}
 
 

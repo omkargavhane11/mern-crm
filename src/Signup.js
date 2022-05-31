@@ -33,7 +33,7 @@ export function Signup({ users, setUsers }) {
                             email: email,
                             password: password,
                             contact: contact,
-                            role: "admin"
+                            role: "manager"
                         }
                         fetch(`${API}/users`, {
                             method: "POST",
