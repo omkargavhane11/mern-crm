@@ -15,6 +15,7 @@ import { API } from "./global.js";
 import { VerifyEmail } from './VerifyEmail';
 import { VerifyToken } from './VerifyToken';
 import { PasswordReset } from './PasswordReset';
+import { Contacts } from './Contacts';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
           <Route path="/:username/services" element={<Services />} />
           <Route path="/:username/services/edit/:id" element={<EditService />} />
           <Route path="/:username/services/new_service_request" element={<AddService />} />
+          <Route path="/:username/contacts" element={<Contacts />} />
         </Routes>
 
       </div >
