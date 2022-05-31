@@ -15,20 +15,35 @@ export function OneService({ service }) {
 
     return (
         <div className="oneLead">
-            <p className="h6_custom bold">First Name :</p>
-            <p className="h6_custom">{service.fname}</p>
-            <p className="h6_custom bold">Last Name :</p>
-            <p className="h6_custom">{service.lname}</p>
-            <p className="h6_custom bold">Email :</p>
-            <p className="h6_custom">{service.email}</p>
-            <p className="h6_custom bold">Address :</p>
-            <p className="h6_custom">{service.address}</p>
-            <p className="h6_custom bold">Contact No :</p>
-            <p className="h6_custom">{service.contactNo}</p>
-            <p className="h6_custom bold">Intrested In :</p>
-            <p className="h6_custom">{service.intrest}</p>
-            <p className="h6_custom bold">Service status :</p>
-            <p className="h6_custom">{service.status}</p>
+            <div className="content">
+                <p className="h6_custom bold">First Name :</p>
+                <p className="h6_custom">{service.fname}</p>
+            </div>
+            <div className="content">
+                <p className="h6_custom bold">Last Name :</p>
+                <p className="h6_custom">{service.lname}</p>
+            </div>
+            <div className="content">
+                <p className="h6_custom bold">Email :</p>
+                <p className="h6_custom">{service.email}</p>
+            </div>
+            <div className="content">
+                <p className="h6_custom bold">Address :</p>
+                <p className="h6_custom">{service.address}</p>
+            </div>
+            <div className="content">
+
+                <p className="h6_custom bold">Contact No :</p>
+                <p className="h6_custom">{service.contactNo}</p>
+            </div>
+            <div className="content">
+                <p className="h6_custom bold">Intrested In :</p>
+                <p className="h6_custom">{service.intrest}</p>
+            </div>
+            <div className="content">
+                <p className="h6_custom bold">Service Status :</p>
+                <p className="h6_custom">{service.status}</p>
+            </div>
 
             <br />
             <div className="button_div">

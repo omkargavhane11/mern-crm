@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { API } from "./global.js";
 import React from 'react';
+import { Navbar } from "./Navbar";
 
 export function Home() {
     const navigate = useNavigate();
@@ -23,26 +24,29 @@ export function Home() {
     }, [])
 
     return (
-        <div className="home_parent">
-            <div className="home">
-                <h2>Welcome, username</h2>
-                <h4>Your one stop solution to get services to manage operations</h4>
-            </div>
-            <div className="dashboard">
-                <div className="dashboard_content leads" onClick={() => {
-                    navigate(`/${username}/leads`);
-                }}>
-                    <p className="count">{lead_data.length}</p>
-                    <p className="h6_custom">Leads</p>
+        <>
+            <Navbar />
+            <div className="home_parent">
+                <div className="home">
+                    <h2>Welcome, username</h2>
+                    <h4>Your one stop solution to get services to manage operations</h4>
                 </div>
-                <div className="dashboard_content sales" onClick={() => {
-                    navigate(`/${username}/services`);
-                }}>
-                    <p className="count">{service_data.length}</p>
-                    <p className="h6_custom">Services</p>
-                </div>
+                <div className="dashboard">
+                    <div className="dashboard_content leads" onClick={() => {
+                        navigate(`/${username}/leads`);
+                    }}>
+                        <p className="count">{lead_data.length}</p>
+                        <p className="h6_custom">Leads</p>
+                    </div>
+                    <div className="dashboard_content sales" onClick={() => {
+                        navigate(`/${username}/services`);
+                    }}>
+                        <p className="count">{service_data.length}</p>
+                        <p className="h6_custom">Services</p>
+                    </div>
 
+                </div>
             </div>
-        </div>
+        </>
     );
 }
