@@ -28,18 +28,11 @@ export function SignIn({ users }) {
 
     return (
         <div className="signup_form_parent">
-            <div className="signup_form">
+            <div className="signin_form">
                 <p>New User ? <span onClick={() => navigate('/signup')} className="signup_redirect">Sign up</span></p>
                 <h4>Login to your account</h4>
                 <input onChange={(e) => setUsername(e.target.value)} type="email" className="input" placeholder="Enter your username" />
                 <input onChange={(e) => setPassword(e.target.value)} type="text" className="input" placeholder="Enter your password" />
-                <p
-                    onClick={() => navigate('/verifyemail')}
-                    style={forgot}
-                    id="forgot"
-                    className="forgot">
-                    Forgot Password ?
-                </p>
                 <p style={credentials} id="invalid" className="invalid shake">Invalid credentials</p>
                 <button
                     className="btn addLead_form_save"
@@ -54,6 +47,13 @@ export function SignIn({ users }) {
                         }
                     }}
                 >Login</button>
+                <p
+                    onClick={() => navigate('/verifyemail')}
+                    style={forgot}
+                    id="forgot"
+                    className="forgot">
+                    Forgot Password ?
+                </p>
             </div>
 
         </div >

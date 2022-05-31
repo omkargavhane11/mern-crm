@@ -38,7 +38,7 @@ export function VerifyEmail() {
             <div className="verifyemail">
                 <h4>Verify account </h4>
 
-                <input onChange={(e) => setEmail(e.target.value)} className="addLead_input" type="email" id="Email" name="Email" placeholder="Your email.." />
+                <input onChange={(e) => setEmail(e.target.value)} className="input" type="email" id="Email" name="Email" placeholder="Your email.." />
 
                 <button
                     className="btn addLead_form_save"
