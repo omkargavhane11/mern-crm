@@ -9,8 +9,8 @@ export function Home() {
     const { username } = useParams();
 
     const [lead_data, setlead_data] = useState([]);
-
     const [service_data, setservice_data] = useState([]);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         fetch(`${API}/leads`)
@@ -23,13 +23,19 @@ export function Home() {
             .then((data) => setservice_data(data));
     }, [])
 
+    useEffect(() => {
+        fetch(`${API}/users/${username}`)
+            .then((res) => res.json())
+            .then((data) => setUser(data[0]));
+    }, [])
+
     return (
         <>
             <Navbar />
             <div className="home_parent">
                 <div className="home">
-                    <h2>Welcome, username</h2>
-                    <h4>Your one stop solution to get services to manage operations</h4>
+                    <h2>Welcome {user.fname} !</h2>
+                    {/* <h4>Your one stop solution to get services to manage operations</h4> */}
                 </div>
                 <div className="dashboard">
                     <div className="dashboard_content leads" onClick={() => {
