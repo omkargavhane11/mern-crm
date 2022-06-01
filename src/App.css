@@ -82,6 +82,7 @@ padding-top: 50px;
   text-align: center;
   justify-content: center;
   background-color: rgb(250, 247, 247);
+  margin-top: -50px;
 }
 .signup_redirect{
   text-decoration :underline;
