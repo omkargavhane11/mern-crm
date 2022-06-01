@@ -55,10 +55,10 @@ export function VerifyEmail() {
                         // console.log(randomString);
                     }}
                 >Verify</button>
-                <button
-                    className="btn addLead_form_save"
+                <p
+                    className="signup_redirect"
                     onClick={() => navigate('/')}
-                >Cancel</button>
+                >Cancel</p>
             </div>
 
         </div>
