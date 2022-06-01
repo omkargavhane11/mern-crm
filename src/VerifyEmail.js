@@ -10,7 +10,7 @@ export function VerifyEmail() {
     const [email, setEmail] = useState();
     const [users, setUsers] = useState();
     const name = "admin";
-    const [something, setSomething] = useState("lkhbbhvdbhdvb");
+    // const [something, setSomething] = useState("lkhbbhvdbhdvb");
     // Math.random().toString(36).replace(/[^a-z]+/g, '')
 
     useEffect(() => {
@@ -23,11 +23,11 @@ export function VerifyEmail() {
         return u.find((m) => m.email === email);
     }
 
-    function sendEmail(code) {
+    function sendEmail(something) {
         send(
             'service_7jqb24r',
             'template_t26ubhn', // template id of lead mail body
-            { name, email, code }, //{sender_name,sender_email,message}
+            { name, email, something }, //{sender_name,sender_email,message}
             'lyZGPaZXRsmWLyAOx'  //public key
         ).then((res) => console.log(res, res.message))
             .catch((err) => console.log(err, err.message))
@@ -43,16 +43,30 @@ export function VerifyEmail() {
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        // (Math.random().toString(36).replace(/[^a-z]+/g, ''))
-
+                        let something = (Math.random().toString(36).replace(/[^a-z]+/g, ''))
+                        let tempToken = { tempToken: something }
                         let result = check(users);
                         if (result) {
+                            sendEmail(something)
 
-                            alert("user exists")
+                            // alert("Check Email")
+
+                            fetch(`${API}/users/${result.username}`,
+                                {
+                                    method: "PUT",
+                                    body: JSON.stringify(tempToken),
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                })
+                                .then((res) => res.json())
+                                .then(() => navigate(`/verifytoken/${result.username}`));
+
+                            console.log(tempToken);
                         } else {
                             alert("Email address not registered");
                         }
-                        // console.log(randomString);
+                        console.log(something);
                     }}
                 >Verify</button>
                 <p

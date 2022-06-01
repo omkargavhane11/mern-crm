@@ -1,15 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react';
+import { API } from "./global.js";
 
-
-export function SignIn({ users }) {
+export function SignIn() {
 
     const navigate = useNavigate();
-    // const [users, setUsers] = useState();
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [user, setUser] = useState();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [invalid, setInvalid] = useState(false);
+
 
     const credentials = {
         color: "red",
@@ -22,8 +23,20 @@ export function SignIn({ users }) {
         cursor: "pointer"
     }
 
+    useEffect(() => {
+        fetch(`${API}/users/${username}`)
+            .then((res) => res.json())
+            .then((data) => setUser(data[0]));
+    }, [username])
+
     function check(u) {
-        return u.find((m) => m.username === username && m.password === password)
+        if (password.length === 0 || username.length === 0) {
+            return false;
+        } else if (user.username === username && user.password === password) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     return (
@@ -37,13 +50,12 @@ export function SignIn({ users }) {
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        let result = check(users);
+                        let result = check(user)
                         if (result) {
                             setInvalid(false)
                             navigate(`/${username}/home`);
                         } else {
                             setInvalid(true)
-                            document.getElementById("invalid").style.className = "shake";
                         }
                     }}
                 >Login</button>

@@ -1,22 +1,36 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { API } from "./global.js";
 
 export function VerifyToken() {
 
     const navigate = useNavigate();
-
-    const [email, setEmail] = useState();
+    const { username } = useParams();
+    const [code, setCode] = useState();
     const [users, setUsers] = useState();
+    const [invalid, setInvalid] = useState(false);
+
+    const credentials = {
+        color: "red",
+        display: invalid ? "block" : "none",
+    }
+
     useEffect(() => {
         fetch(`${API}/users`)
             .then((res) => res.json())
             .then((data) => setUsers(data));
     }, []);
 
-    function check(u) {
-        return u.find((m) => m.email === email);
+    function passwordMatch(u) {
+        let getUser = u.find((m) => m.username === username);
+        let getUserToken = getUser.tempToken;
+        // console.log(getUserToken);
+        if (getUserToken === code) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     return (
@@ -24,12 +38,19 @@ export function VerifyToken() {
             <div className="verifyemail">
                 <p>Enter the code sent to your e-mail</p>
 
-                <input onChange={(e) => setEmail(e.target.value)} className="addLead_input" type="email" id="Email" name="Email" placeholder="Mailed code" />
+                <input onChange={(e) => setCode(e.target.value)} className="addLead_input" type="text" id="text" name="text" placeholder="Mailed code" />
+                <p style={credentials} id="invalid" className="invalid shake">Invalid code</p>
 
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        navigate('/passwordreset')
+                        let result = passwordMatch(users)
+                        if (result) {
+                            setInvalid(false)
+                            navigate(`/passwordreset/${username}`)
+                        } else {
+                            setInvalid(true)
+                        }
                     }}
                 >Verify</button>
                 <button

@@ -290,3 +290,14 @@ padding-top: 50px;
   /* margin-top: 10px; */
   margin-bottom: 5px;
 }
+
+.passResetDiv{
+  margin: auto;
+  height: auto;
+  /* width:310px; */
+  /* border: 1px solid grey; */
+  /* border-radius:15px; */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}

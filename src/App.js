@@ -34,10 +34,10 @@ function App() {
 
       <div div className="main" >
         <Routes>
-          <Route path="/" element={<SignIn users={users} setUsers={setUsers} />} />
+          <Route path="/" element={<SignIn />} />
           <Route path="/verifyemail" element={<VerifyEmail />} />
-          <Route path="/verifytoken" element={<VerifyToken />} />
-          <Route path="/passwordreset" element={<PasswordReset />} />
+          <Route path="/verifytoken/:username" element={<VerifyToken />} />
+          <Route path="/passwordreset/:username" element={<PasswordReset />} />
           <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
           <Route path="/:username/home" element={<Home />} />
           <Route path="/:username/leads" element={<Leads />} />
