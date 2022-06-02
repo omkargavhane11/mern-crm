@@ -45,7 +45,7 @@ export function Signup({ users, setUsers }) {
                             .then(() => navigate('/'));
                     }}
                 >Sign Up</button>
-                <p><span onClick={() => navigate('/')} className="signup_redirect">Sign In</span></p>
+                <p><span onClick={() => navigate('/')} className="signup_redirect">cancel</span></p>
             </div>
 
         </div >

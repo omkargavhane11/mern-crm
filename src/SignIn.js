@@ -18,7 +18,7 @@ export function SignIn() {
     }
 
     const forgot = {
-        display: invalid ? "block" : "none",
+        display: "block",
         textDecoration: "underline",
         cursor: "pointer"
     }
