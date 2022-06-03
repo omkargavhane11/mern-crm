@@ -4,84 +4,59 @@ import { API } from "./global.js";
 import React from 'react';
 import { send } from 'emailjs-com';
 import { Navbar } from "./Navbar";
+import TextField from '@mui/material/TextField';
+import * as yup from "yup";
+import { useFormik } from 'formik';
 
 export function AddLead() {
 
     const navigate = useNavigate();
     const { username } = useParams();
 
-    const [fname, setFname] = useState();
-    const [lname, setLname] = useState();
-    const [email, setEmail] = useState();
-    const [address, setAddress] = useState();
-    const [contact, setContact] = useState();
-    const [intrest, setIntrest] = useState();
+    const formValidationSchema = yup.object({
+        fname: yup.string().required("First name required").min(2, "Longer first name needed"),
+        lname: yup.string().required("Last name required").min(2, "Longer last name needed"),
+        email: yup.string().required("Email required").min(5, "set proper email"),
+        address: yup.string().required("address required").min(5, "set proper address"),
+        contact: yup.number().required("Contact information required").min(10, "Need proper contact number"),
+        intrest: yup.string().required("intrest required").min(4, "Need longer intrest"),
+        status: yup.string().required("Username required").min(3, "set proper status"),
+    })
 
+    const formik = useFormik({
+        initialValues: { fname: "", lname: "", status: "", email: "", password: "", contact: "", address: "", intrest: "" },
+        validationSchema: formValidationSchema,
+        onSubmit: (newLead) => {
+            createLead(newLead)
+        }
+    });
 
-    // function sendEmail(a) {
-    //     send(
-    //         'service_7jqb24r',
-    //         'template_o2rtfcj', // template id of lead mail body
-    //         { fname, email, a }, //{sender_name,sender_email,message}
-    //         'lyZGPaZXRsmWLyAOx'
-    //     ).then((res) => console.log(res, res.message))
-    //         .catch((err) => console.log(err, err.message))
-    // };
+    function createLead(newLead) {
+        fetch(`${API}/leads`, {
+            method: "POST",
+            body: JSON.stringify(newLead),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((data) => data.json())
+            .then(() => navigate(`/${username}/leads`))
+    }
 
     return (
         <>
             <Navbar />
             <div className="addLead_parent">
-
-                <div className="addLead_form">
+                <form onSubmit={formik.handleSubmit} className="addLead_form">
                     <h3>Add New Lead </h3>
-                    <label className="addLead_label" for="fname">First Name</label>
-                    <input onChange={(e) => setFname(e.target.value)} className="addLead_input" type="text" id="fname" name="firstname" placeholder="Your firstname.." />
-
-                    <label className="addLead_label" for="lname">Last Name</label>
-                    <input onChange={(e) => setLname(e.target.value)} className="addLead_input" type="text" id="lname" name="lastname" placeholder="Your last name.." />
-
-                    <label className="addLead_label" for="Email">Email</label>
-                    <input onChange={(e) => setEmail(e.target.value)} className="addLead_input" type="email" id="Email" name="Email" placeholder="Your email.." />
-
-                    <label className="addLead_label" for="Address">Address</label>
-                    <input onChange={(e) => setAddress(e.target.value)} className="addLead_input" type="text" id="Address" name="Address" placeholder="Address" />
-
-                    <label className="addLead_label" for="contactNo">Contact No</label>
-                    <input onChange={(e) => setContact(e.target.value)} className="addLead_input" type="number" id="contactNo" name="contactNo" placeholder="contactNo" />
-
-                    <label className="addLead_label" for="intrest">Intrested in </label>
-                    <input onChange={(e) => setIntrest(e.target.value)} className="addLead_input" type="text" id="intrest" name="intrest" placeholder="intrest" />
-
-
-                    <button
-                        onClick={() => {
-                            let newLead = {
-                                fname: fname,
-                                lname: lname,
-                                email: email,
-                                address: address,
-                                contactNo: contact,
-                                intrest: intrest,
-                                status: "new"
-                            }
-                            fetch(`${API}/leads`, {
-                                method: "POST",
-                                body: JSON.stringify(newLead),
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                            }).then((data) => data.json())
-                                .then(() => navigate(`/${username}/leads`))
-
-                            // sendEmail(newLead)
-                        }}
-
-
-                        className="addLead_form_save" type="submit" value="Submit">Add</button>
-                </div>
-
-
+                    <TextField id="fname" name="fname" type="text" error={formik.touched.fname && formik.errors.fname} helperText={formik.touched.fname && formik.errors.fname ? formik.errors.fname : ""} value={formik.values.fname} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="First name *" />
+                    <TextField id="lname" name="lname" type="text" error={formik.touched.lname && formik.errors.lname} helperText={formik.touched.lname && formik.errors.lname ? formik.errors.lname : ""} value={formik.values.lname} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="Last name *" />
+                    <TextField id="email" name="email" type="email" error={formik.touched.email && formik.errors.email} helperText={formik.touched.email && formik.errors.email ? formik.errors.email : ""} value={formik.values.email} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="Enter your email *" />
+                    <TextField id="address" name="address" type="text" error={formik.touched.address && formik.errors.address} helperText={formik.touched.address && formik.errors.address ? formik.errors.address : ""} value={formik.values.address} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="Set address (min length 4 characters) *" />
+                    <TextField id="contact" name="contact" type="text" error={formik.touched.contact && formik.errors.contact} helperText={formik.touched.contact && formik.errors.contact ? formik.errors.contact : ""} value={formik.values.contact} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="Contact number *" />
+                    <TextField id="intrest" name="intrest" type="text" error={formik.touched.intrest && formik.errors.intrest} helperText={formik.touched.intrest && formik.errors.intrest ? formik.errors.intrest : ""} value={formik.values.intrest} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="Set intrest (min length 4 characters) *" />
+                    <TextField id="status" name="status" type="text" error={formik.touched.status && formik.errors.status} helperText={formik.touched.status && formik.errors.status ? formik.errors.status : ""} value={formik.values.status} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="Set status *" />
+                    <button className="addLead_form_save" type="submit" value="Submit">Add</button>
+                </form>
             </div >
         </>
     );

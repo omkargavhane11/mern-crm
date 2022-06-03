@@ -92,11 +92,15 @@ padding-top: 50px;
   margin: auto;
   height: auto;
   width:310px;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   border-radius:15px;
   padding: 10px;
   display: flex;
   flex-direction: column;
+}
+.signup_form > h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .signin_form{
   margin: auto;
@@ -146,11 +150,10 @@ padding-top: 50px;
 } 
 
 .input{
-  height:24px;
+  height:auto;
   margin-top: 8px;
-  font-size: 16px;
-  padding: 3px;
-  /* text-align: center; */
+  /* font-size: 16px; */
+  /* padding: 3px; */
 }
 .btn{
   border:none;
@@ -257,18 +260,18 @@ padding-top: 50px;
   flex-direction: column;
   width: 400px;
   justify-content: center;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   margin-top: 20px;
   padding:8px;
   border-radius: 8px;
   /* border:none; */
-  background-color: rgb(244, 237, 237);
+  /* background-color: rgb(244, 237, 237); */
 }
 .addLead_form_save{
-  height:29px;
-  margin-top: 10px;
+  height:39px;
+  margin-top: 15px;
   font-size:18px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   padding: 3px;
   background-color: rgb(4, 180, 255);
   border:none;
@@ -282,7 +285,11 @@ padding-top: 50px;
 }
 .addLead_input{
   font-size: 16px;
-  height:20px;
+  height:auto;
+}
+.addLead_form >h3 {
+  margin-bottom: 14px;
+  margin-top: 10px;
 }
 .addLead_option{
   font-size: 16px;
