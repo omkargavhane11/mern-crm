@@ -18,12 +18,6 @@ export function SignIn() {
         display: invalid ? "block" : "none",
     }
 
-    const forgot = {
-        display: "block",
-        textDecoration: "underline",
-        cursor: "pointer"
-    }
-
     useEffect(() => {
         fetch(`${API}/users/${username}`)
             .then((res) => res.json())
@@ -60,9 +54,16 @@ export function SignIn() {
                         }
                     }}
                 >Login</button>
+                {/* <p
+                    onClick={() => navigate('/verifyemail')}
+                    class="forgot"
+                    id="forgot"
+                    className="forgot">
+                    Forgot username ?
+                </p> */}
                 <p
                     onClick={() => navigate('/verifyemail')}
-                    style={forgot}
+                    class="forgot"
                     id="forgot"
                     className="forgot">
                     Forgot Password ?

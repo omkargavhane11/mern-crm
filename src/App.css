@@ -308,3 +308,12 @@ padding-top: 50px;
   display: flex;
   flex-direction: column;
 }
+
+/*  */
+.forgot{
+  display: block;
+  cursor: pointer;
+}
+.forgot:hover{
+  text-decoration: underline;
+}
