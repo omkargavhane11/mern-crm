@@ -40,9 +40,10 @@ export function Signup({ users, setUsers }) {
     }
 
 
+
     return (
         <div className="signup_form_parent">
-            <form onSubmit={formik.handleSubmit} id="submit" className="signup_form">
+            <form onSubmit={formik.handleSubmit} id="submit" className="signup_form" >
                 <h3>Sign Up form</h3>
 
                 <TextField id="fname" name="fname" type="text" error={formik.touched.fname && formik.errors.fname} helperText={formik.touched.fname && formik.errors.fname ? formik.errors.fname : ""} value={formik.values.fname} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="First name *" />
