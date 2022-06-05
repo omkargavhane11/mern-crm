@@ -27,7 +27,7 @@ export function Signup({ users, setUsers }) {
     });
 
     const createMovie = (newUser) => {
-        fetch(`${API}/users/signup`, {
+        fetch(`${API}/users`, {
             method: "POST",
             body: JSON.stringify(newUser),
             headers: {
