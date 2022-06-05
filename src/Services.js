@@ -8,13 +8,14 @@ import { Navbar } from "./Navbar";
 export function Services() {
     const { username } = useParams();
     const navigate = useNavigate();
+    const [count, setCount] = useState(0);
 
     const [service_data, setservice_data] = useState([]);
     useEffect(() => {
         fetch(`${API}/services`)
             .then((res) => res.json())
             .then((data) => setservice_data(data));
-    }, [service_data])
+    }, [count])
 
     const [user, setUser] = useState({});
     useEffect(() => {
@@ -40,7 +41,7 @@ export function Services() {
                     New service request
                 </button>
                 <div className="lead_display">
-                    {service_data.map((mv, index) => <OneService key={index} service={mv} service_data={service_data} setservice_data={setservice_data} />)}
+                    {service_data.map((mv, index) => <OneService key={index} service={mv} service_data={service_data} setservice_data={setservice_data} count={count} setCount={setCount} />)}
                 </div>
             </div>
         </>

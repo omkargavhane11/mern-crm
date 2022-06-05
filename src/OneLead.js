@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { API } from "./global.js";
 import React, { useEffect, useState } from 'react';
 
-export function OneLead({ lead }) {
+export function OneLead({ lead, setCount, count }) {
     const { username } = useParams();
     const navigate = useNavigate();
 
@@ -62,7 +62,8 @@ export function OneLead({ lead }) {
                     className="save_changes"
                     onClick={() => {
                         if (user.role === 'admin' || user.role === 'manager') {
-                            fetch(`${API}/leads/edit/${lead._id}`, { method: "DELETE" }).then(() => navigate(`/${username}/leads`))
+                            fetch(`${API}/leads/edit/${lead._id}`, { method: "DELETE" }).then(() => navigate(`/${username}/leads`)).then(() => setCount(count + 1))
+
                         } else {
                             alert("Not authorized to delete lead")
                         }

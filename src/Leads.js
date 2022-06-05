@@ -9,12 +9,13 @@ export function Leads() {
     const navigate = useNavigate();
     const [lead_data, setlead_data] = useState([]);
     const [user, setUser] = useState({});
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
         fetch(`${API}/leads`)
             .then((res) => res.json())
             .then((data) => setlead_data(data));
-    }, [lead_data])
+    }, [count])
 
     useEffect(() => {
         fetch(`${API}/users/${username}`)
@@ -42,7 +43,7 @@ export function Leads() {
                 </button>
 
                 <div className="lead_display">
-                    {lead_data.map((mv, index) => <OneLead key={index} lead={mv} id={mv._id} lead_data={lead_data} setlead_data={setlead_data} />)}
+                    {lead_data.map((mv, index) => <OneLead key={index} lead={mv} id={mv._id} lead_data={lead_data} setlead_data={setlead_data} count={count} setCount={setCount} />)}
                 </div>
 
             </div>

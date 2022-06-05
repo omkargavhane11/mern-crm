@@ -19,7 +19,7 @@ export function Signup({ users, setUsers }) {
     })
 
     const formik = useFormik({
-        initialValues: { fname: "", lname: "", username: "", email: "", password: "", contact: "" },
+        initialValues: { fname: "", lname: "", username: "", email: "", password: "", contact: "", role: "manager" },
         validationSchema: formValidationSchema,
         onSubmit: (newUser) => {
             createMovie(newUser)

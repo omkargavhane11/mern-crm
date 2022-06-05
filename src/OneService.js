@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { API } from "./global.js";
 import React, { useEffect, useState } from 'react';
 
-export function OneService({ service }) {
+export function OneService({ service, count, setCount }) {
     const navigate = useNavigate();
     const { username } = useParams();
 
@@ -58,7 +58,7 @@ export function OneService({ service }) {
                 <button type="button" className="save_changes"
                     onClick={() => {
                         if (user.role === 'admin' || user.role === 'manager') {
-                            fetch(`${API}/services/edit/${service._id}`, { method: "DELETE" }).then(() => navigate(`/${username}/services`))
+                            fetch(`${API}/services/edit/${service._id}`, { method: "DELETE" }).then(() => navigate(`/${username}/services`)).then(() => setCount(count + 1))
                         } else {
                             alert("Not authorized to delete lead")
                         }

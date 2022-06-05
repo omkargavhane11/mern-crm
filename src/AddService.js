@@ -20,7 +20,7 @@ export function AddService() {
         address: yup.string().required("address required").min(5, "set proper address"),
         contact: yup.number().required("Contact information required").min(10, "Need proper contact number"),
         intrest: yup.string().required("intrest required").min(4, "Need longer intrest"),
-        status: yup.string().required("Username required").min(4, "set proper username"),
+        status: yup.string().required("Username required").min(3, "status invalid"),
     })
 
     const formik = useFormik({
