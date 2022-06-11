@@ -19,13 +19,13 @@ import { Contacts } from './Contacts';
 
 function App() {
 
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    fetch(`${API}/users`)
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, [])
+  // useEffect(() => {
+  //   fetch(`${API}/users`)
+  //     .then((res) => res.json())
+  //     .then((data) => setUsers(data));
+  // }, [])
 
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ function App() {
           <Route path="/verifyemail" element={<VerifyEmail />} />
           <Route path="/verifytoken/:username" element={<VerifyToken />} />
           <Route path="/passwordreset/:username" element={<PasswordReset />} />
-          <Route path="/signup" element={<Signup users={users} setUsers={setUsers} />} />
+          <Route path="/signup" />
           <Route path="/:username/home" element={<Home />} />
           <Route path="/:username/leads" element={<Leads />} />
           <Route path="/:username/leads/edit/:id" element={<EditLead />} />
