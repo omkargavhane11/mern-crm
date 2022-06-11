@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react'
 import React from 'react';
 import { API } from "./global.js";
 import TextField from '@mui/material/TextField';
+import { Audio, Circles, TailSpin } from 'react-loader-spinner';
+
+
+
 
 export function SignIn() {
 
@@ -11,6 +15,7 @@ export function SignIn() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalid, setInvalid] = useState(false);
+    const [load, setLoad] = useState(false);
 
 
     const credentials = {
@@ -18,20 +23,27 @@ export function SignIn() {
         display: invalid ? "block" : "none",
     }
 
-    useEffect(() => {
-        fetch(`${API}/users/${username}`)
-            .then((res) => res.json())
-            .then((data) => setUser(data[0]));
-    }, [username])
-
-    function check(u) {
-        if (password.length === 0 || username.length === 0) {
-            return false;
-        } else if (user.username === username && user.password === password) {
-            return true;
+    function validate(abc) {
+        setUser(abc)
+        if (abc && abc.password === password) {
+            setInvalid(false)
+            setLoad(false)
+            navigate(`/${username}/home`)
+            console.log("login successfull");
         } else {
-            return false;
+            setInvalid(true)
+            setLoad(false)
         }
+    }
+    async function LoginUser(credentials) {
+        const response = await fetch(`${API}/users/login`, {
+            method: "POST",
+            body: JSON.stringify(credentials),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((data) => data.json())
+            .then((abc) => validate(abc))
     }
 
     return (
@@ -45,15 +57,15 @@ export function SignIn() {
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        let result = check(user)
-                        if (result) {
-                            setInvalid(false)
-                            navigate(`/${username}/home`);
-                        } else {
-                            setInvalid(true)
+                        setLoad(true)
+
+                        let credentials = {
+                            username: username,
+                            password: password
                         }
+                        LoginUser(credentials)
                     }}
-                >Login</button>
+                >{load ? <TailSpin color="white" height={20} width={20} /> : "Login"}</button>
                 {/* <p
                     onClick={() => navigate('/verifyemail')}
                     class="forgot"
@@ -73,3 +85,16 @@ export function SignIn() {
         </div >
     );
 }
+
+
+function Loader() {
+    return (
+        <Audio
+            height="100"
+            width="100"
+            color='grey'
+            ariaLabel='loading'
+        />
+    )
+}
+
