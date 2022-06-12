@@ -13,6 +13,24 @@ export function Home() {
     const [user, setUser] = useState({});
 
     useEffect(() => {
+        fetch(`${API}/login`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-access-token": localStorage.getItem('token')
+            },
+        }).then((data) => data.json())
+            .then((data) => setDataToLocalStorage(data))
+    }, [])
+
+    function setDataToLocalStorage(data) {
+        localStorage.setItem('username', data.username)
+        localStorage.setItem('fname', data.fname)
+        localStorage.setItem('role', data.role)
+
+    }
+
+    useEffect(() => {
         fetch(`${API}/leads`)
             .then((res) => res.json())
             .then((data) => setlead_data(data));
@@ -22,6 +40,7 @@ export function Home() {
             .then((res) => res.json())
             .then((data) => setservice_data(data));
     }, [])
+
 
     return (
         <>
@@ -33,13 +52,13 @@ export function Home() {
                 </div>
                 <div className="dashboard">
                     <div className="dashboard_content leads" onClick={() => {
-                        navigate(`/${username}/leads`);
+                        navigate(`/${user.username}/leads`);
                     }}>
                         <p className="count">{lead_data.length}</p>
                         <p className="h6_custom">Leads</p>
                     </div>
                     <div className="dashboard_content sales" onClick={() => {
-                        navigate(`/${username}/services`);
+                        navigate(`/${user.username}/services`);
                     }}>
                         <p className="count">{service_data.length}</p>
                         <p className="h6_custom">Services</p>

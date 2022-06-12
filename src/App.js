@@ -39,7 +39,7 @@ function App() {
           <Route path="/verifytoken/:username" element={<VerifyToken />} />
           <Route path="/passwordreset/:username" element={<PasswordReset />} />
           <Route path="/signup" />
-          <Route path="/:username/home" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/:username/leads" element={<Leads />} />
           <Route path="/:username/leads/edit/:id" element={<EditLead />} />
           <Route path="/:username/leads/add_lead_request" element={<AddLead />} />

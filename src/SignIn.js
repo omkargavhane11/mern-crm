@@ -23,8 +23,9 @@ export function SignIn() {
         if (abc.message == "successfull") {
             setInvalid(false)
             setLoad(false)
-            navigate(`/${username}/home`)
+            navigate(`/home`)
             console.log("login successfull");
+            localStorage.setItem("token", abc.token)
         } else {
             setInvalid(true)
             setLoad(false)

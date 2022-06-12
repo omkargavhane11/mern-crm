@@ -5,10 +5,10 @@ import { OneLead } from "./OneLead";
 import { Navbar } from "./Navbar";
 
 export function Leads() {
-    const { username } = useParams();
     const navigate = useNavigate();
     const [lead_data, setlead_data] = useState([]);
-    const [user, setUser] = useState({});
+    const [username, setUsername] = useState(localStorage.getItem('username'));
+    const [role, setRole] = useState(localStorage.getItem('role'));
     const [count, setCount] = useState(0);
 
     useEffect(() => {
@@ -17,13 +17,6 @@ export function Leads() {
             .then((data) => setlead_data(data));
     }, [count])
 
-    useEffect(() => {
-        fetch(`${API}/users/${username}`)
-            .then((res) => res.json())
-            .then((data) => setUser(data[0]));
-    }, [])
-
-
 
     return (
         <>
@@ -31,7 +24,7 @@ export function Leads() {
             <div className="leads_parent">
                 <button
                     onClick={() => {
-                        if (user.role === 'admin' || user.role === 'manager') {
+                        if (role === 'admin' || role === 'manager') {
                             navigate(`/${username}/leads/add_lead_request`)
                         } else {
                             alert("Not authorized to add new lead")
