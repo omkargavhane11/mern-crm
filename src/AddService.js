@@ -11,7 +11,6 @@ import { useFormik } from 'formik';
 export function AddService() {
 
     const navigate = useNavigate();
-    const { username } = useParams();
 
     const formValidationSchema = yup.object({
         fname: yup.string().required("First name required").min(2, "Longer first name needed"),
@@ -39,7 +38,7 @@ export function AddService() {
                 "Content-Type": "application/json",
             },
         }).then((data) => data.json())
-            .then(() => navigate(`/${username}/services`))
+            .then(() => navigate(`/services`))
     }
 
     return (
@@ -56,6 +55,13 @@ export function AddService() {
                     <TextField id="intrest" name="intrest" type="text" error={formik.touched.intrest && formik.errors.intrest} helperText={formik.touched.intrest && formik.errors.intrest ? formik.errors.intrest : ""} value={formik.values.intrest} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="Set intrest (min length 4 characters) *" />
                     <TextField id="status" name="status" type="text" error={formik.touched.status && formik.errors.status} helperText={formik.touched.status && formik.errors.status ? formik.errors.status : ""} value={formik.values.status} onBlur={formik.handleBlur} onChange={formik.handleChange} className="input" placeholder="Set status *" />
                     <button className="addLead_form_save" type="submit" value="Add">Add</button>
+                    <button
+                        onClick={() => {
+                            navigate(`/services`);
+                        }}
+                        className="addLead_form_save" type="submit" value="Cancel">
+                        Cancel
+                    </button>
                 </form>
             </div>
         </>

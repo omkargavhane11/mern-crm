@@ -40,13 +40,13 @@ function App() {
           <Route path="/passwordreset/:username" element={<PasswordReset />} />
           <Route path="/signup" />
           <Route path="/home" element={<Home />} />
-          <Route path="/:username/leads" element={<Leads />} />
-          <Route path="/:username/leads/edit/:id" element={<EditLead />} />
-          <Route path="/:username/leads/add_lead_request" element={<AddLead />} />
-          <Route path="/:username/services" element={<Services />} />
-          <Route path="/:username/services/edit/:id" element={<EditService />} />
-          <Route path="/:username/services/new_service_request" element={<AddService />} />
-          <Route path="/:username/contacts" element={<Contacts />} />
+          <Route path="/leads" element={<Leads />} />
+          <Route path="/leads/edit/:id" element={<EditLead />} />
+          <Route path="/leads/add_lead_request" element={<AddLead />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/edit/:id" element={<EditService />} />
+          <Route path="/services/new_service_request" element={<AddService />} />
+          <Route path="/contacts" element={<Contacts />} />
         </Routes>
 
       </div >

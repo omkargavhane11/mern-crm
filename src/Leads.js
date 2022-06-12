@@ -5,6 +5,7 @@ import { OneLead } from "./OneLead";
 import { Navbar } from "./Navbar";
 
 export function Leads() {
+
     const navigate = useNavigate();
     const [lead_data, setlead_data] = useState([]);
     const [username, setUsername] = useState(localStorage.getItem('username'));
@@ -25,7 +26,7 @@ export function Leads() {
                 <button
                     onClick={() => {
                         if (role === 'admin' || role === 'manager') {
-                            navigate(`/${username}/leads/add_lead_request`)
+                            navigate(`/leads/add_lead_request`)
                         } else {
                             alert("Not authorized to add new lead")
                         }

@@ -4,9 +4,10 @@ import React from 'react';
 import { API } from "./global.js";
 
 export function EditLead() {
-    const { id, username } = useParams();
 
+    const { id } = useParams();
     const [data, setData] = useState();
+
     useEffect(() => {
         fetch(`${API}/leads/edit/${id}`)
             .then((res) => res.json())
@@ -15,13 +16,13 @@ export function EditLead() {
 
 
     return (
-        data ? <EditLeadForm data={data} username={username} /> : "Loading..."
+        data ? <EditLeadForm data={data} /> : "Loading..."
     )
 
 }
 
 
-function EditLeadForm({ data, username }) {
+function EditLeadForm({ data }) {
     // const { username } = useParams();
     const navigate = useNavigate();
 
@@ -73,11 +74,18 @@ function EditLeadForm({ data, username }) {
                                 },
                             })
                             .then((res) => res.json())
-                            .then(() => navigate(`/${username}/leads`));
+                            .then(() => navigate(`/leads`));
 
                     }}
                     className="addLead_form_save" type="submit" value="Submit">
                     Save
+                </button>
+                <button
+                    onClick={() => {
+                        navigate(`/leads`);
+                    }}
+                    className="addLead_form_save" type="submit" value="Cancel">
+                    Cancel
                 </button>
             </div>
 

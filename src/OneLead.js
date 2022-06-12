@@ -3,15 +3,9 @@ import { API } from "./global.js";
 import React, { useEffect, useState } from 'react';
 
 export function OneLead({ lead, setCount, count }) {
-    const { username } = useParams();
-    const navigate = useNavigate();
 
-    const [user, setUser] = useState({});
-    useEffect(() => {
-        fetch(`${API}/users/${username}`)
-            .then((res) => res.json())
-            .then((data) => setUser(data[0]));
-    }, [])
+    const [role, setRole] = useState(localStorage.getItem('role'));
+    const navigate = useNavigate();
 
     return (
         <div className="oneLead">
@@ -50,8 +44,8 @@ export function OneLead({ lead, setCount, count }) {
                     type="button"
                     className="save_changes"
                     onClick={() => {
-                        if (user.role === 'admin' || user.role === 'manager') {
-                            navigate(`/${username}/leads/edit/${lead._id}`)
+                        if (role === 'admin' || role === 'manager') {
+                            navigate(`/leads/edit/${lead._id}`)
                         } else {
                             alert("Not authorized to edit lead")
                         }
@@ -61,8 +55,8 @@ export function OneLead({ lead, setCount, count }) {
                     type="button"
                     className="save_changes"
                     onClick={() => {
-                        if (user.role === 'admin' || user.role === 'manager') {
-                            fetch(`${API}/leads/edit/${lead._id}`, { method: "DELETE" }).then(() => navigate(`/${username}/leads`)).then(() => setCount(count + 1))
+                        if (role === 'admin' || role === 'manager') {
+                            fetch(`${API}/leads/edit/${lead._id}`, { method: "DELETE" }).then(() => navigate(`/leads`)).then(() => setCount(count + 1))
 
                         } else {
                             alert("Not authorized to delete lead")

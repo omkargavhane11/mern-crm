@@ -3,15 +3,10 @@ import { API } from "./global.js";
 import React, { useEffect, useState } from 'react';
 
 export function OneService({ service, count, setCount }) {
-    const navigate = useNavigate();
-    const { username } = useParams();
 
-    const [user, setUser] = useState({});
-    useEffect(() => {
-        fetch(`${API}/users/${username}`)
-            .then((res) => res.json())
-            .then((data) => setUser(data[0]));
-    }, [])
+    const [role, setRole] = useState(localStorage.getItem('role'));
+    const navigate = useNavigate();
+
 
     return (
         <div className="oneLead">
@@ -48,8 +43,8 @@ export function OneService({ service, count, setCount }) {
             <br />
             <div className="button_div">
                 <button type="button" className="save_changes" onClick={() => {
-                    if (user.role === 'admin' || user.role === 'manager') {
-                        navigate(`/${username}/services/edit/${service._id}`)
+                    if (role === 'admin' || role === 'manager') {
+                        navigate(`/services/edit/${service._id}`)
                     } else {
                         alert("Not authorized to edit service")
                     }
@@ -57,8 +52,8 @@ export function OneService({ service, count, setCount }) {
                 }}>Edit</button>
                 <button type="button" className="save_changes"
                     onClick={() => {
-                        if (user.role === 'admin' || user.role === 'manager') {
-                            fetch(`${API}/services/edit/${service._id}`, { method: "DELETE" }).then(() => navigate(`/${username}/services`)).then(() => setCount(count + 1))
+                        if (role === 'admin' || role === 'manager') {
+                            fetch(`${API}/services/edit/${service._id}`, { method: "DELETE" }).then(() => navigate(`/services`)).then(() => setCount(count + 1))
                         } else {
                             alert("Not authorized to delete lead")
                         }

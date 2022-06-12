@@ -5,9 +5,8 @@ import React from 'react';
 import { Navbar } from "./Navbar";
 
 export function Home() {
-    const navigate = useNavigate();
-    const { username } = useParams();
 
+    const navigate = useNavigate();
     const [lead_data, setlead_data] = useState([]);
     const [service_data, setservice_data] = useState([]);
     const [user, setUser] = useState({});
@@ -27,7 +26,7 @@ export function Home() {
         localStorage.setItem('username', data.username)
         localStorage.setItem('fname', data.fname)
         localStorage.setItem('role', data.role)
-
+        setUser(data.fname)
     }
 
     useEffect(() => {
@@ -52,13 +51,13 @@ export function Home() {
                 </div>
                 <div className="dashboard">
                     <div className="dashboard_content leads" onClick={() => {
-                        navigate(`/${user.username}/leads`);
+                        navigate(`/leads`);
                     }}>
                         <p className="count">{lead_data.length}</p>
                         <p className="h6_custom">Leads</p>
                     </div>
                     <div className="dashboard_content sales" onClick={() => {
-                        navigate(`/${user.username}/services`);
+                        navigate(`/services`);
                     }}>
                         <p className="count">{service_data.length}</p>
                         <p className="h6_custom">Services</p>
