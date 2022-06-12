@@ -3,20 +3,16 @@ import { useState, useEffect } from 'react'
 import React from 'react';
 import { API } from "./global.js";
 import TextField from '@mui/material/TextField';
-import { Audio, Circles, TailSpin } from 'react-loader-spinner';
-
-
+import { TailSpin } from 'react-loader-spinner';
 
 
 export function SignIn() {
 
     const navigate = useNavigate();
-    const [user, setUser] = useState();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalid, setInvalid] = useState(false);
     const [load, setLoad] = useState(false);
-
 
     const credentials = {
         color: "red",
@@ -24,8 +20,7 @@ export function SignIn() {
     }
 
     function validate(abc) {
-        setUser(abc)
-        if (abc && abc.password === password) {
+        if (abc.message == "successfull") {
             setInvalid(false)
             setLoad(false)
             navigate(`/${username}/home`)
@@ -36,7 +31,7 @@ export function SignIn() {
         }
     }
     async function LoginUser(credentials) {
-        const response = await fetch(`${API}/users/login`, {
+        const response = await fetch(`${API}/login`, {
             method: "POST",
             body: JSON.stringify(credentials),
             headers: {
