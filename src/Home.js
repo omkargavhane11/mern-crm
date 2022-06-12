@@ -23,12 +23,6 @@ export function Home() {
             .then((data) => setservice_data(data));
     }, [])
 
-    useEffect(() => {
-        fetch(`${API}/users/${username}`)
-            .then((res) => res.json())
-            .then((data) => setUser(data[0]));
-    }, [])
-
     return (
         <>
             <Navbar />
