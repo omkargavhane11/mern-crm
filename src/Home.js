@@ -26,6 +26,7 @@ export function Home() {
         localStorage.setItem('username', data.username)
         localStorage.setItem('fname', data.fname)
         localStorage.setItem('role', data.role)
+        setUser(data.fname)
     }
 
     useEffect(() => {
