@@ -9,7 +9,7 @@ export function Home() {
     const navigate = useNavigate();
     const [lead_data, setlead_data] = useState([]);
     const [service_data, setservice_data] = useState([]);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(localStorage.getItem('fname'));
 
     useEffect(() => {
         fetch(`${API}/login`, {
@@ -26,7 +26,6 @@ export function Home() {
         localStorage.setItem('username', data.username)
         localStorage.setItem('fname', data.fname)
         localStorage.setItem('role', data.role)
-        setUser(data.fname)
     }
 
     useEffect(() => {
@@ -46,7 +45,7 @@ export function Home() {
             <Navbar />
             <div className="home_parent">
                 <div className="home">
-                    <h2>Welcome {user.fname} !</h2>
+                    <h2>Welcome {user} !</h2>
                     {/* <h4>Your one stop solution to get services to manage operations</h4> */}
                 </div>
                 <div className="dashboard">
