@@ -10,6 +10,8 @@ export function VerifyToken() {
     const [code, setCode] = useState();
     const [users, setUsers] = useState();
     const [invalid, setInvalid] = useState(false);
+    const [tempToken, setTempToken] = useState(localStorage.getItem('tempToken'));
+
 
     const credentials = {
         color: "red",
@@ -47,7 +49,7 @@ export function VerifyToken() {
                         let result = passwordMatch(users)
                         if (result) {
                             setInvalid(false)
-                            navigate(`/passwordreset/${username}`)
+                            navigate(`/passwordreset`)
                         } else {
                             setInvalid(true)
                         }

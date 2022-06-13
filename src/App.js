@@ -36,8 +36,8 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/verifyemail" element={<VerifyEmail />} />
-          <Route path="/verifytoken/:username" element={<VerifyToken />} />
-          <Route path="/passwordreset/:username" element={<PasswordReset />} />
+          <Route path="/verifytoken" element={<VerifyToken />} />
+          <Route path="/passwordreset" element={<PasswordReset />} />
           <Route path="/signup" />
           <Route path="/home" element={<Home />} />
           <Route path="/leads" element={<Leads />} />

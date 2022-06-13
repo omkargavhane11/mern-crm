@@ -3,24 +3,44 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { API } from "./global.js";
 import { send } from 'emailjs-com';
+import { TailSpin } from 'react-loader-spinner';
 
 export function VerifyEmail() {
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState();
-    const [users, setUsers] = useState();
+    const [email, setEmail] = useState("");
+    const [verifyEmail, setVerifyEmail] = useState();
     const name = "admin";
-    // const [something, setSomething] = useState("lkhbbhvdbhdvb");
-    // Math.random().toString(36).replace(/[^a-z]+/g, '')
+    const [load, setLoad] = useState(false);
+    const [invalid, setInvalid] = useState(false);
+    const credentials = {
+        color: "red",
+        display: invalid ? "block" : "none",
+    }
 
-    useEffect(() => {
-        fetch(`${API}/users`)
-            .then((res) => res.json())
-            .then((data) => setUsers(data));
-    }, []);
+    async function check(email) {
+        const response = await fetch(`${API}/verifyemail`, {
+            method: "POST",
+            body: JSON.stringify(email),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((data) => data.json())
+            .then((data) => validate(data))
+    }
 
-    function check(u) {
-        return u.find((m) => m.email === email);
+    function validate(data) {
+        const something = (Math.random().toString(36).replace(/[^a-z]+/g, ''))
+        if (data == true) {
+            setInvalid(false)
+            setLoad(false)
+            sendEmail(something)
+            localStorage.setItem('tempToken', something)
+            navigate(`/verifytoken`)
+        } else {
+            setInvalid(true)
+            setLoad(false)
+        }
     }
 
     function sendEmail(something) {
@@ -39,36 +59,32 @@ export function VerifyEmail() {
                 <h4>Verify account </h4>
 
                 <input onChange={(e) => setEmail(e.target.value)} className="input" type="email" id="Email" name="Email" placeholder="Your email.." />
-
+                <p style={credentials} id="invalid" className="invalid shake">Invalid credentials</p>
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        let something = (Math.random().toString(36).replace(/[^a-z]+/g, ''))
-                        let tempToken = { tempToken: something }
-                        let result = check(users);
-                        if (result) {
-                            sendEmail(something)
 
-                            // alert("Check Email")
 
-                            fetch(`${API}/users/${result.username}`,
-                                {
-                                    method: "PUT",
-                                    body: JSON.stringify(tempToken),
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    },
-                                })
-                                .then((res) => res.json())
-                                .then(() => navigate(`/verifytoken/${result.username}`));
+                        if (email.length > 6) {
+                            setLoad(true)
+                            check(email)
+                            // if (verifyEmail.message == true) {
+                            //     setInvalid(false)
+                            //     setLoad(false)
+                            //     sendEmail(something)
+                            //     localStorage.setItem('tempToken', something)
+                            //     navigate(`/verifytoken`)
+                            // } else {
+                            //     setInvalid(true)
+                            //     setLoad(false)
+                            // }
 
-                            console.log(tempToken);
                         } else {
-                            alert("Email address not registered");
+                            setInvalid(true)
+                            setLoad(false)
                         }
-                        console.log(something);
                     }}
-                >Verify</button>
+                >{load ? <TailSpin color="white" height={20} width={20} /> : "Verify email"}</button>
                 <p
                     className="signup_redirect"
                     onClick={() => navigate('/')}

@@ -24,7 +24,6 @@ export function SignIn() {
             setInvalid(false)
             setLoad(false)
             navigate(`/home`)
-            console.log("login successfull");
             localStorage.setItem("token", abc.token)
         } else {
             setInvalid(true)
