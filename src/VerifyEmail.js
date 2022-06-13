@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { API } from "./global.js";
 import { send } from 'emailjs-com';
 import { TailSpin } from 'react-loader-spinner';
+import TextField from '@mui/material/TextField';
 
 export function VerifyEmail() {
     const navigate = useNavigate();
@@ -58,7 +59,7 @@ export function VerifyEmail() {
             <div className="verifyemail">
                 <h4>Verify account </h4>
 
-                <input onChange={(e) => setEmail(e.target.value)} className="input" type="email" id="Email" name="Email" placeholder="Your email.." />
+                <TextField onChange={(e) => setEmail(e.target.value)} className="input" type="email" id="Email" name="Email" placeholder="Your email.." />
                 <p style={credentials} id="invalid" className="invalid shake">Invalid credentials</p>
                 <button
                     className="btn addLead_form_save"

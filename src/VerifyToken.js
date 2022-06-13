@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { API } from "./global.js";
+import TextField from '@mui/material/TextField';
 
 export function VerifyToken() {
 
@@ -40,7 +41,7 @@ export function VerifyToken() {
             <div className="verifyemail">
                 <p>Enter the code sent to your e-mail</p>
 
-                <input onChange={(e) => setCode(e.target.value)} className="addLead_input" type="text" id="text" name="text" placeholder="Mailed code" />
+                <TextField onChange={(e) => setCode(e.target.value)} className="addLead_input" type="text" id="text" name="text" placeholder="Mailed code" />
                 <p style={credentials} id="invalid" className="invalid shake">Invalid code</p>
 
                 <button
