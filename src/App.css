@@ -287,6 +287,7 @@ padding-top: 50px;
 .addLead_parent{
   display:flex;
   justify-content: center;
+  /* padding-top: -50px; */
 }
 .addLead_form{
   display:flex;
@@ -294,9 +295,12 @@ padding-top: 50px;
   width: 400px;
   justify-content: center;
   /* border: 1px solid grey; */
-  margin-top: 20px;
+  /* margin-top: 20px; */
   padding:8px;
+  margin-top: -50px;
   border-radius: 8px;
+  gap:8px;
+
   /* border:none; */
   /* background-color: rgb(244, 237, 237); */
 }
