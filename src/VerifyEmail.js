@@ -18,11 +18,14 @@ export function VerifyEmail() {
         color: "red",
         display: invalid ? "block" : "none",
     }
+    const [payload, setPayload] = useState({
+        email: email
+    });
 
-    async function check(email) {
+    async function check(payload) {
         const response = await fetch(`${API}/verifyemail`, {
             method: "POST",
-            body: JSON.stringify(email),
+            body: JSON.stringify(payload),
             headers: {
                 "Content-Type": "application/json",
             },
