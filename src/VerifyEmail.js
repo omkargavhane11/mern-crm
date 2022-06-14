@@ -23,13 +23,14 @@ export function VerifyEmail() {
     });
 
     async function check(payload) {
-        const response = await fetch(`${API}/verifyemail`, {
+        await fetch(`${API}/verifyemail`, {
             method: "POST",
             body: JSON.stringify(payload),
-            headers: {
+            header: {
                 "Content-Type": "application/json",
             },
-        }).then((data) => data.json())
+        })
+            // .then((data) => data.json())
             .then((data) => validate(data))
     }
 
