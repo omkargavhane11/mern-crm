@@ -69,7 +69,10 @@ export function VerifyToken() {
                 >{load ? <TailSpin color="white" height={20} width={20} /> : "Verify"}</button>
                 <button
                     className="btn addLead_form_save"
-                    onClick={() => navigate('/')}
+                    onClick={() => {
+                        navigate('/')
+                        localStorage.clear()
+                    }}
                 >Cancel</button>
             </div>
 

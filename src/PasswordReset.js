@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { API } from "./global.js";
+import TextField from '@mui/material/TextField';
 
 export function PasswordReset() {
 
@@ -9,14 +10,14 @@ export function PasswordReset() {
     const [passUpdate, setPassUpdate] = useState(false);
 
     return (
-        passUpdate ? <PassUpdateSuccess setPassUpdate={setPassUpdate} /> : <PasswordResetForm />
+        passUpdate ? <PassUpdateSuccess setPassUpdate={setPassUpdate} /> : <PasswordResetForm setPassUpdate={setPassUpdate} />
     );
 }
 
 
 function PasswordResetForm({ setPassUpdate }) {
 
-    const { username } = useParams();
+    const [username, setUsername] = useState(localStorage.getItem('username'));
     const navigate = useNavigate();
     const [confirmPassword, setConfirmPassword] = useState("");
     const [password, setPassword] = useState("");
@@ -40,8 +41,8 @@ function PasswordResetForm({ setPassUpdate }) {
         <div className="signup_form_parent">
             <div className="verifyemail">
                 <h4>New Password</h4>
-                <input onChange={(e) => setPassword(e.target.value)} type="password" className="input" placeholder="password" />
-                <input onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" placeholder="confirm password" />
+                <TextField onChange={(e) => setPassword(e.target.value)} type="password" className="input" placeholder="password" />
+                <TextField onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" placeholder="confirm password" />
                 <p style={credentials} id="invalid" className="invalid shake">Password not matched  </p>
 
                 <button
@@ -51,7 +52,7 @@ function PasswordResetForm({ setPassUpdate }) {
                         if (password.length > 0 && confirmPassword.length > 0 && password === confirmPassword) {
 
                             setInvalid(false)
-                            setResetpass(true)
+                            setPassUpdate(true)
                             let newPassword = { password: password };
 
                             fetch(`${API}/users/${username}`,
@@ -63,17 +64,20 @@ function PasswordResetForm({ setPassUpdate }) {
                                     },
                                 })
                                 .then((res) => res.json())
-                                .then(() => navigate(`/`));
+                            // .then(() => navigate(`/`));
                         } else {
-                            setInvalid(true);
-                            setResetpass(false)
+                            setInvalid(true)
+                            setPassUpdate(false)
                             console.log("password mismatch");
                         }
                     }}
                 >Save</button>
                 <button
                     className="btn addLead_form_save"
-                    onClick={() => navigate('/')}
+                    onClick={() => {
+                        navigate('/')
+                        localStorage.clear()
+                    }}
                 >Cancel</button>
             </div>
 

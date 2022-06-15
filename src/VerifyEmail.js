@@ -99,7 +99,10 @@ export function VerifyEmail() {
                 >{load ? <TailSpin color="white" height={20} width={20} /> : "Verify email"}</button>
                 <p
                     className="signup_redirect"
-                    onClick={() => navigate('/')}
+                    onClick={() => {
+                        navigate('/')
+                        localStorage.clear()
+                    }}
                 >Cancel</p>
             </div>
 
