@@ -3,15 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { API } from "./global.js";
 import TextField from '@mui/material/TextField';
+import { TailSpin } from 'react-loader-spinner';
 
 export function VerifyToken() {
 
     const navigate = useNavigate();
-    const { username } = useParams();
-    const [code, setCode] = useState();
-    const [users, setUsers] = useState();
+    const [email, setEmail] = useState(localStorage.getItem('email'));
+    const [code, setCode] = useState("");
+    const [load, setLoad] = useState(false);
     const [invalid, setInvalid] = useState(false);
-    const [tempToken, setTempToken] = useState(localStorage.getItem('tempToken'));
+    // const [tempToken, setTempToken] = useState(localStorage.getItem('tempToken'));
 
 
     const credentials = {
@@ -19,22 +20,31 @@ export function VerifyToken() {
         display: invalid ? "block" : "none",
     }
 
-    useEffect(() => {
-        fetch(`${API}/users`)
-            .then((res) => res.json())
-            .then((data) => setUsers(data));
-    }, []);
+    async function getTokenFromDB() {
+        let payload = {
+            email: email
+        }
+        await fetch(`${API}/verifytoken`, {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((data) => data.json()).then((data) => verifyToken(data))
+    }
 
-    function passwordMatch(u) {
-        let getUser = u.find((m) => m.username === username);
-        let getUserToken = getUser.tempToken;
-        // console.log(getUserToken);
-        if (getUserToken === code) {
-            return true;
+    function verifyToken(data) {
+        if (code == data.token) {
+            setLoad(false)
+            setInvalid(false)
+            navigate(`/passwordreset`)
         } else {
-            return false;
+            setLoad(false)
+            setInvalid(true)
+            console.log("not matched", data);
         }
     }
+
 
     return (
         <div className="signup_form_parent">
@@ -47,15 +57,16 @@ export function VerifyToken() {
                 <button
                     className="btn addLead_form_save"
                     onClick={() => {
-                        let result = passwordMatch(users)
-                        if (result) {
-                            setInvalid(false)
-                            navigate(`/passwordreset`)
-                        } else {
-                            setInvalid(true)
-                        }
+                        setLoad(true)
+                        getTokenFromDB()
+                        // if (result) {
+                        // setInvalid(false)
+                        // navigate(`/passwordreset`)
+                        // } else {
+                        //     setInvalid(true)
+                        // }
                     }}
-                >Verify</button>
+                >{load ? <TailSpin color="white" height={20} width={20} /> : "Verify"}</button>
                 <button
                     className="btn addLead_form_save"
                     onClick={() => navigate('/')}

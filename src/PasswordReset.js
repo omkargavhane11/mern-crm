@@ -71,7 +71,10 @@ function PasswordResetForm({ setPassUpdate }) {
                         }
                     }}
                 >Save</button>
-
+                <button
+                    className="btn addLead_form_save"
+                    onClick={() => navigate('/')}
+                >Cancel</button>
             </div>
 
         </div>

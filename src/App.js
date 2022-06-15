@@ -38,7 +38,7 @@ function App() {
           <Route path="/verifyemail" element={<VerifyEmail />} />
           <Route path="/verifytoken" element={<VerifyToken />} />
           <Route path="/passwordreset" element={<PasswordReset />} />
-          <Route path="/signup" />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
           <Route path="/leads" element={<Leads />} />
           <Route path="/leads/edit/:id" element={<EditLead />} />
